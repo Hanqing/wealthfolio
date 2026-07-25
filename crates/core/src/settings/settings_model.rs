@@ -21,7 +21,7 @@ impl Default for Settings {
     fn default() -> Self {
         Self {
             theme: "light".to_string(),
-            font: "font-mono".to_string(),
+            font: "font-sans".to_string(),
             language: "en".to_string(),
             base_currency: "".to_string(),
             timezone: "".to_string(),

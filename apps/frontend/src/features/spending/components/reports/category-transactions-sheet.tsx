@@ -194,8 +194,8 @@ export function CategoryTransactionsSheet({
 
   const accent = category?.color ?? "var(--muted-foreground)";
   const tintBg = category?.color ? `${category.color}24` : "var(--muted)";
-  // Strong-at-top, fade-to-transparent — gives the header the warm "drill-down"
-  // panel feel from the inspiration. Falls back to a neutral muted wash so the
+  // Strong-at-top, fade-to-transparent — gives the header a quiet drill-down
+  // hierarchy. Falls back to a neutral muted wash so the
   // anatomy is visible even when a category has no color set.
   const headerFill = category?.color ? `${category.color}40` : "rgba(120,120,120,0.18)";
   const headerFillMid = category?.color ? `${category.color}1A` : "rgba(120,120,120,0.06)";

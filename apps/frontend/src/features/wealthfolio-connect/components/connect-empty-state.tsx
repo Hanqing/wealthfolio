@@ -7,9 +7,9 @@ import { useTranslation } from "react-i18next";
 import { ConnectFlowDiagram } from "./connect-flow-diagram";
 
 const colorClasses = {
-  orange: {
-    bg: "bg-orange-100 dark:bg-orange-900/30",
-    icon: "text-orange-600 dark:text-orange-400",
+  brand: {
+    bg: "bg-brand/10",
+    icon: "text-brand",
   },
   blue: {
     bg: "bg-blue-100 dark:bg-blue-900/30",
@@ -29,7 +29,7 @@ export function ConnectEmptyState() {
       icon: Icons.CloudSync2,
       title: t("connect:emptyState.features.brokerageSync.title"),
       description: t("connect:emptyState.features.brokerageSync.description"),
-      color: "orange",
+      color: "brand",
     },
     {
       icon: Icons.Devices,
@@ -50,7 +50,11 @@ export function ConnectEmptyState() {
       <div className="w-full max-w-3xl space-y-8 sm:space-y-12">
         {/* Header with Logo */}
         <header className="text-center">
-          <img alt="Wealthfolio" className="mx-auto mb-4 h-16 w-16" src="/logo-vantage.png" />
+          <img
+            alt="Wealthfolio"
+            className="shadow-minimal mx-auto mb-4 h-16 w-16 rounded-2xl"
+            src="/logo-fresh.svg"
+          />
           <div className="bg-secondary text-secondary-foreground mb-3 inline-flex items-center gap-1.5 rounded-full px-2.5 py-0.5 text-xs font-medium">
             <Icons.Sparkles className="h-3 w-3" />
             {t("connect:emptyState.optional")}

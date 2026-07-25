@@ -1,10 +1,8 @@
 import type { CategoryAllocation, NetWorthHistoryPoint, TaxonomyAllocation } from "@/lib/types";
 import { formatPercent } from "@/lib/utils";
 
-// Goldish orange net-worth theme (matches the history chart). Reserved for the
-// chart/brand; value numbers use semantic green/red tones (orange == warning).
-export const THEME_COLOR = "hsl(38 75% 50%)";
-export const THEME_COLOR_LIGHT = "hsl(38 75% 50% / 0.12)";
+// Quiet branded surface for the empty state; value numbers stay semantic.
+export const THEME_COLOR_LIGHT = "color-mix(in oklab, var(--brand) 8%, transparent)";
 
 /** Semantic text tone for a signed value: green gain, red loss, muted when flat. */
 export function toneClass(value: number): string {
@@ -25,18 +23,16 @@ export function toneFill(value: number): string {
 
 export const CARD_LABEL = "text-muted-foreground/70 text-xs font-semibold uppercase tracking-wide";
 
-// Muted, semantic category palette (tuned for the warm/cream theme). Used for
-// the composition bar, breakdown row dots, and the detail-sheet icons so they
-// stay consistent. Liabilities keep the semantic red.
-// NOTE: tuned for light mode — dark-mode variants would need theme-aware tokens.
+// Craft-inspired analytical palette shared by bars, row dots, and detail icons.
+// Liabilities keep the semantic destructive color.
 export const CATEGORY_CSS_COLORS: Record<string, string> = {
-  properties: "#4b4137", // warm dark taupe / charcoal
-  investments: "#6f7544", // muted olive green
-  cash: "#d8c98f", // pale cream / light gold
-  vehicles: "#6d7c86", // muted slate
-  otherAssets: "#928d83", // medium warm gray
-  preciousMetals: "#b8923a", // soft gold
-  collectibles: "#8a6b49", // muted brown
+  properties: "#8b5fb3",
+  investments: "#4d86c6",
+  cash: "#64aeb0",
+  vehicles: "#7e9ac8",
+  otherAssets: "#8a8790",
+  preciousMetals: "#d4a24e",
+  collectibles: "#c47c99",
   liabilities: "var(--destructive)",
 };
 

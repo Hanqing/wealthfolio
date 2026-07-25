@@ -165,7 +165,7 @@ const AccountSummaryComponent = React.memo(
       }
 
       return (
-        <div className="border-border/40 bg-card/90 shadow-xs flex w-full items-center justify-between gap-3 rounded-xl border px-4 py-3 backdrop-blur-xl md:px-5 md:py-4">
+        <div className="shadow-minimal bg-background flex w-full items-center justify-between gap-3 rounded-lg px-4 py-3 md:px-5 md:py-4">
           {skeletonContent}
         </div>
       );
@@ -327,7 +327,7 @@ const AccountSummaryComponent = React.memo(
       return (
         <div
           onClick={onToggle}
-          className="flex w-full cursor-pointer items-center justify-between gap-3 rounded-lg p-3 transition-colors duration-150 md:p-4"
+          className="hover:bg-foreground/[0.025] flex w-full cursor-pointer items-center justify-between gap-3 rounded-lg p-3 transition-colors duration-150 md:p-4"
         >
           {content}
         </div>
@@ -348,7 +348,7 @@ const AccountSummaryComponent = React.memo(
       return (
         <Link
           to={`/accounts/${accountId}`}
-          className="border-border/40 bg-card/90 shadow-xs flex w-full cursor-pointer items-center justify-between gap-3 rounded-xl border px-4 py-3 backdrop-blur-xl transition-all duration-150 hover:shadow-md md:px-5 md:py-4"
+          className="shadow-minimal hover:bg-foreground/[0.02] bg-background flex w-full cursor-pointer items-center justify-between gap-3 rounded-lg px-4 py-3 transition-colors duration-150 md:px-5 md:py-4"
         >
           {content}
         </Link>
@@ -356,7 +356,7 @@ const AccountSummaryComponent = React.memo(
     }
 
     return (
-      <div className="border-border/40 bg-card/90 shadow-xs flex w-full items-center justify-between gap-3 rounded-xl border px-4 py-3 backdrop-blur-xl md:px-5 md:py-4">
+      <div className="shadow-minimal bg-background flex w-full items-center justify-between gap-3 rounded-lg px-4 py-3 md:px-5 md:py-4">
         {content}
       </div>
     );
@@ -500,7 +500,7 @@ export const AccountsSummary = React.memo(
         return Array.from({ length: 4 }).map((_, index) => (
           <div
             key={`skeleton-${index}`}
-            className="border-border/40 bg-card/90 shadow-xs rounded-xl border px-4 py-3 backdrop-blur-xl md:px-5 md:py-4"
+            className="shadow-minimal bg-background rounded-lg px-4 py-3 md:px-5 md:py-4"
           >
             <AccountSummarySkeleton />
           </div>
@@ -622,7 +622,7 @@ export const AccountsSummary = React.memo(
               return (
                 <div
                   key={group.accountName}
-                  className="border-border/40 bg-card/90 shadow-xs overflow-hidden rounded-xl border backdrop-blur-xl transition-shadow duration-150 hover:shadow-md"
+                  className="shadow-minimal bg-background overflow-hidden rounded-lg"
                 >
                   <div className="cursor-pointer">
                     <AccountSummaryComponent

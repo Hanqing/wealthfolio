@@ -5,7 +5,7 @@
 /* Fonts - using variable fonts where available for best performance */
 /* Inter (sans) - variable font: single file for all weights */
 @import "@fontsource-variable/inter";
-/* Merriweather (serif) - selective weights for body/heading use */
+/* Serif remains available as an explicit user preference. */
 @import "@fontsource/merriweather/400.css";
 @import "@fontsource/merriweather/400-italic.css";
 @import "@fontsource/merriweather/700.css";
@@ -58,8 +58,10 @@
 
 @theme {
   /* Font families */
-  --font-sans: "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Merriweather", ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans:
+    "Inter Variable", Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", ui-sans-serif,
+    system-ui, sans-serif;
+  --font-serif: Merriweather, ui-serif, Georgia, Cambria, "Times New Roman", Times, serif;
   --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
 
   /* Disable default colors to prevent their use; feel free to re-enable as needed. */
@@ -89,21 +91,21 @@
   --color-stone-*: initial;
 
   /* Specify new default colors. */
-  --color-black: #100f0f;
-  --color-paper: #fffcf0;
-  --color-base-50: #f2f0e5;
-  --color-base-100: #e6e4d9;
-  --color-base-150: #dad8ce;
-  --color-base-200: #cecdc3;
-  --color-base-300: #b7b5ac;
-  --color-base-400: #9f9d96;
-  --color-base-500: #878580;
-  --color-base-600: #6f6e69;
-  --color-base-700: #575653;
-  --color-base-800: #403e3c;
-  --color-base-850: #343331;
-  --color-base-900: #282726;
-  --color-base-950: #1c1b1a;
+  --color-black: #26242a;
+  --color-paper: #faf9fb;
+  --color-base-50: #f7f6f8;
+  --color-base-100: #efedf1;
+  --color-base-150: #e7e5e9;
+  --color-base-200: #dedce1;
+  --color-base-300: #c9c6cd;
+  --color-base-400: #aaa6b0;
+  --color-base-500: #87828e;
+  --color-base-600: #6b6672;
+  --color-base-700: #514c57;
+  --color-base-800: #39353f;
+  --color-base-850: #302d35;
+  --color-base-900: #28252d;
+  --color-base-950: #1d1b21;
   --color-red-50: #ffe1d5;
   --color-red-100: #ffcabb;
   --color-red-150: #fdb2a2;
@@ -248,6 +250,8 @@
   --color-input: var(--input);
   --color-input-bg: var(--input-bg);
   --color-ring: var(--ring);
+  --color-brand: var(--brand);
+  --color-surface-elevated: var(--surface-elevated);
 
   /* Chart colors */
   --color-chart-1: var(--chart-1);
@@ -363,17 +367,16 @@
 }
 
 :root {
-  /* Base radius - desktop default */
-  --radius: 0.625rem;
+  /* Craft-inspired shape and control sizing */
+  --radius: 0.5rem;
 
-  /* Input heights - desktop default */
-  --input-height: 2.75rem; /* h-11 */
-  --input-height-lg: 2.75rem; /* h-11 */
+  /* Inputs stay touch-friendly while matching Craft's compact desktop rhythm. */
+  --input-height: 2.5rem;
+  --input-height-lg: 2.75rem;
 
-  /* Button heights - desktop default */
-  --button-height: 2.5rem; /* h-10 */
-  --button-height-sm: 2.25rem; /* h-9 */
-  --button-height-lg: 2.75rem; /* h-11 */
+  --button-height: 2.25rem;
+  --button-height-sm: 2rem;
+  --button-height-lg: 2.5rem;
 
   /* Card padding - desktop default */
   --card-padding: 1rem; /* p-4 */
@@ -385,69 +388,84 @@
   /* Font size - desktop default */
   --font-size-base: 0.875rem; /* text-sm */
 
-  /* Flexoki Light Theme (HSL numeric components) */
-  --flexoki-bg: 48 100% 97%;
-  --flexoki-bg-2: 51 59% 95%;
-  --flexoki-ui: 51 21% 88%;
-  --flexoki-ui-2: 50 14% 83%;
-  --flexoki-ui-3: 55 10% 79%;
-  --flexoki-tx: 0 3% 6%;
-  --flexoki-tx-2: 50 3% 42%;
-  --flexoki-tx-3: 49 7% 70%;
-  --flexoki-re: 3 62% 42%;
-  --flexoki-gr: 73 84% 27%;
-  --flexoki-ye: 45 99% 34%;
+  /* Cool-neutral compatibility scale. The legacy variable names remain because
+     theme previews and a few range controls consume the numeric HSL values. */
+  --flexoki-bg: 270 20% 98%;
+  --flexoki-bg-2: 270 12% 97%;
+  --flexoki-ui: 270 11% 94%;
+  --flexoki-ui-2: 270 8% 90%;
+  --flexoki-ui-3: 270 6% 82%;
+  --flexoki-tx: 270 8% 15%;
+  --flexoki-tx-2: 268 5% 42%;
+  --flexoki-tx-3: 268 4% 66%;
+  --flexoki-re: 4 63% 54%;
+  --flexoki-gr: 142 54% 34%;
+  --flexoki-ye: 36 64% 48%;
 
   /* Shadcn tokens as full HSL colors */
   --background: hsl(var(--flexoki-bg));
   --foreground: hsl(var(--flexoki-tx));
-  --card: hsl(var(--flexoki-bg-2));
+  --card: hsl(var(--flexoki-bg));
   --card-foreground: hsl(var(--flexoki-tx));
-  --popover: hsl(var(--flexoki-bg-2));
+  --popover: hsl(var(--flexoki-bg));
   --popover-foreground: hsl(var(--flexoki-tx));
   --primary: hsl(var(--flexoki-tx));
   --primary-foreground: hsl(var(--flexoki-bg));
-  --secondary: hsl(var(--flexoki-ui-2));
-  --secondary-foreground: hsl(var(--flexoki-tx-2));
+  --secondary: hsl(var(--flexoki-ui));
+  --secondary-foreground: hsl(var(--flexoki-tx));
   --muted: hsl(var(--flexoki-ui));
   --muted-foreground: hsl(var(--flexoki-tx-2));
   --accent: hsl(var(--flexoki-ui));
-  --accent-foreground: hsl(var(--flexoki-tx-2));
+  --accent-foreground: hsl(var(--flexoki-tx));
+  --brand: oklch(0.58 0.22 293);
+  --surface-elevated: hsl(var(--flexoki-bg-2));
   --destructive: hsl(var(--flexoki-re));
   --destructive-foreground: hsl(var(--flexoki-bg));
   --success: hsl(var(--flexoki-gr));
   --success-foreground: hsl(var(--flexoki-bg));
   --warning: hsl(var(--flexoki-ye));
   --warning-foreground: hsl(var(--flexoki-bg));
-  --border: hsl(var(--flexoki-ui));
-  --input: hsl(var(--flexoki-ui));
+  --border: color-mix(in oklab, var(--foreground) 7%, var(--background));
+  --input: color-mix(in oklab, var(--foreground) 10%, var(--background));
   --input-bg: hsl(var(--flexoki-bg));
-  --ring: hsl(var(--flexoki-ui-3));
+  --ring: color-mix(in oklab, var(--brand) 72%, var(--foreground));
 
-  /* Charts (allocation palette: forest / sage / sand / clay / plum + stone) */
-  --chart-1: #355c4c;
-  --chart-2: #7e9f8c;
-  --chart-3: #cbba8c;
-  --chart-4: #c08a5f;
-  --chart-5: #9a7e92;
-  --chart-6: hsl(49 7% 70%);
-  --chart-7: hsl(55 10% 79%);
-  --chart-8: hsl(50 14% 83%);
-  --chart-9: hsl(51 21% 88%);
-  --chart-stone: #b1aa9a;
+  --foreground-rgb: 38, 36, 42;
+  --shadow-border-opacity: 0.06;
+  --shadow-blur-opacity: 0.05;
+  --shadow-minimal:
+    0 0 0 1px rgba(var(--foreground-rgb), var(--shadow-border-opacity)),
+    0 1px 1px -0.5px rgba(0, 0, 0, var(--shadow-blur-opacity)),
+    0 3px 3px -1.5px rgba(0, 0, 0, var(--shadow-blur-opacity));
+  --shadow-minimal-flat: 0 0 0 1px rgba(var(--foreground-rgb), var(--shadow-border-opacity));
+  --shadow-modal:
+    0 0 0 1px rgba(var(--foreground-rgb), 0.07), 0 3px 8px rgba(0, 0, 0, 0.07),
+    0 12px 24px -8px rgba(0, 0, 0, 0.1), 0 24px 48px -20px rgba(0, 0, 0, 0.14);
+
+  /* Fresh data palette: lilac, blue, cyan, green, amber, and rose. */
+  --chart-1: oklch(0.62 0.13 293);
+  --chart-2: oklch(0.63 0.13 250);
+  --chart-3: oklch(0.68 0.11 190);
+  --chart-4: oklch(0.62 0.14 145);
+  --chart-5: oklch(0.74 0.14 75);
+  --chart-6: oklch(0.67 0.15 20);
+  --chart-7: oklch(0.72 0.1 320);
+  --chart-8: oklch(0.74 0.06 235);
+  --chart-9: oklch(0.78 0.025 270);
+  --chart-stone: oklch(0.72 0.02 270);
 
   /* Sidebar (full hsl colors) */
-  --sidebar: hsl(var(--flexoki-bg));
+  --sidebar: hsl(var(--flexoki-bg-2));
   --sidebar-foreground: hsl(var(--flexoki-tx));
-  --sidebar-primary: hsl(var(--flexoki-tx));
+  --sidebar-primary: var(--brand);
   --sidebar-primary-foreground: hsl(var(--flexoki-bg));
   --sidebar-accent: hsl(var(--flexoki-ui));
-  --sidebar-accent-foreground: hsl(var(--flexoki-tx-2));
-  --sidebar-border: hsl(var(--flexoki-ui));
-  --sidebar-ring: hsl(var(--flexoki-ui-3));
+  --sidebar-accent-foreground: hsl(var(--flexoki-tx));
+  --sidebar-border: var(--border);
+  --sidebar-ring: var(--ring);
 
-  --liquid-glass-bg: rgba(255, 255, 255, 0.05);
-  --liquid-glass-border: rgba(255, 255, 255, 0.1);
+  --liquid-glass-bg: rgba(250, 249, 251, 0.82);
+  --liquid-glass-border: rgba(38, 36, 42, 0.07);
 
   --inset-top: env(safe-area-inset-top, 0px);
   --inset-right: env(safe-area-inset-right, 0px);
@@ -480,32 +498,35 @@
 }
 
 .dark {
-  /* Flexoki Dark Theme (HSL numeric components) */
-  --flexoki-bg: 0 3% 6%;
-  --flexoki-bg-2: 30 4% 11%;
-  --flexoki-ui: 30 3% 15%;
-  --flexoki-ui-2: 40 3% 20%;
-  --flexoki-ui-3: 30 3% 24%;
-  --flexoki-tx: 55 10% 79%;
-  --flexoki-tx-2: 43 3% 52%;
-  --flexoki-tx-3: 45 2% 33%;
-  --flexoki-re: 5 61% 54%;
-  --flexoki-gr: 72 46% 41%;
-  --flexoki-ye: 45 82% 45%;
+  /* Craft dark mode keeps the same cool hue and foreground-derived layers. */
+  --flexoki-bg: 270 8% 10%;
+  --flexoki-bg-2: 270 6% 13%;
+  --flexoki-ui: 270 6% 16%;
+  --flexoki-ui-2: 270 5% 21%;
+  --flexoki-ui-3: 270 5% 26%;
+  --flexoki-tx: 270 17% 95%;
+  --flexoki-tx-2: 270 6% 69%;
+  --flexoki-tx-3: 270 4% 48%;
+  --flexoki-re: 5 78% 63%;
+  --flexoki-gr: 142 55% 50%;
+  --flexoki-ye: 38 72% 58%;
+  --brand: oklch(0.65 0.22 293);
+  --foreground-rgb: 237, 236, 240;
+  --shadow-border-opacity: 0.13;
+  --shadow-blur-opacity: 0.12;
+  --liquid-glass-bg: rgba(31, 29, 35, 0.82);
+  --liquid-glass-border: rgba(237, 236, 240, 0.1);
 
-  /* Dark chart palette — same semantic hues as light (forest / sage / sand /
-     clay / plum + stone), tuned for the dark surface: forest is lifted for
-     contrast, the stones are pulled down so they stay calm instead of glaring. */
-  --chart-1: hsl(156 28% 44%);
-  --chart-2: #7e9f8c;
-  --chart-3: #cbba8c;
-  --chart-4: #c08a5f;
-  --chart-5: #9a7e92;
-  --chart-6: hsl(49 8% 60%);
-  --chart-7: hsl(55 10% 67%);
-  --chart-8: hsl(50 13% 72%);
-  --chart-9: hsl(51 18% 77%);
-  --chart-stone: hsl(49 8% 60%);
+  --chart-1: oklch(0.72 0.16 293);
+  --chart-2: oklch(0.72 0.14 250);
+  --chart-3: oklch(0.76 0.12 190);
+  --chart-4: oklch(0.72 0.15 145);
+  --chart-5: oklch(0.8 0.14 75);
+  --chart-6: oklch(0.74 0.16 20);
+  --chart-7: oklch(0.78 0.11 320);
+  --chart-8: oklch(0.78 0.07 235);
+  --chart-9: oklch(0.72 0.025 270);
+  --chart-stone: oklch(0.65 0.02 270);
 
   /* Sonner toast overrides for dark mode - solid backgrounds for better readability */
   --toast-bg: hsl(var(--flexoki-bg-2));
@@ -527,6 +548,20 @@
   --input: hsl(var(--flexoki-ui-2));
 }
 
+@layer utilities {
+  .shadow-minimal {
+    box-shadow: var(--shadow-minimal);
+  }
+
+  .shadow-minimal-flat {
+    box-shadow: var(--shadow-minimal-flat);
+  }
+
+  .shadow-modal {
+    box-shadow: var(--shadow-modal);
+  }
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -537,6 +572,11 @@
     font-family: var(--font-sans);
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::selection {
+    color: var(--foreground);
+    background: color-mix(in oklab, var(--brand) 24%, transparent);
   }
 
   button:not(:disabled),
@@ -562,6 +602,17 @@
     -webkit-overflow-scrolling: touch;
     overscroll-behavior: contain;
     scroll-behavior: smooth;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
   }
 }
 
@@ -1008,36 +1059,33 @@ summary {
   cursor: grab;
 }
 
-/* Olive palette for retirement-planner income streams.
-   All hues live in the olive / green-yellow band (95–140) so nothing reads as brown.
-   Differentiation comes from L and hue-shifts inside that band.
-   Light mode uses darker L for contrast on cream cards; .dark lifts L for dark cards. */
+/* Craft data palette for retirement-planner income streams. */
 :root {
-  --fi-stream-1: oklch(0.52 0.1 100); /* warm yellow-olive */
-  --fi-stream-2: oklch(0.46 0.09 125); /* mid olive */
-  --fi-stream-3: oklch(0.6 0.07 140); /* sage */
-  --fi-stream-4: oklch(0.56 0.09 110); /* standard olive */
-  --fi-stream-5: oklch(0.5 0.08 135); /* deep cool olive */
+  --fi-stream-1: oklch(0.62 0.13 293);
+  --fi-stream-2: oklch(0.63 0.13 250);
+  --fi-stream-3: oklch(0.68 0.11 190);
+  --fi-stream-4: oklch(0.62 0.14 145);
+  --fi-stream-5: oklch(0.74 0.14 75);
 }
 .dark {
-  --fi-stream-1: oklch(0.78 0.11 100);
-  --fi-stream-2: oklch(0.72 0.1 125);
-  --fi-stream-3: oklch(0.82 0.07 140);
-  --fi-stream-4: oklch(0.75 0.09 110);
-  --fi-stream-5: oklch(0.7 0.09 135);
+  --fi-stream-1: oklch(0.72 0.16 293);
+  --fi-stream-2: oklch(0.72 0.14 250);
+  --fi-stream-3: oklch(0.76 0.12 190);
+  --fi-stream-4: oklch(0.72 0.15 145);
+  --fi-stream-5: oklch(0.8 0.14 75);
 }
 
-/* When-you-spend heatmap (apps/frontend/src/features/spending). Forest accent
-   in light mode, bright leaf in dark; per-mode opacity floor so the dimmest
+/* When-you-spend heatmap (apps/frontend/src/features/spending). Brand violet
+   keeps the analytical layer distinct from semantic gain/loss colors; the
    cells stay legible against either background. */
 :root {
-  --heatmap-accent: oklch(0.4 0.07 150);
+  --heatmap-accent: oklch(0.55 0.16 293);
   --heatmap-empty-opacity: 0.07;
   --heatmap-min-opacity: 0.18;
   --heatmap-range-opacity: 0.75;
 }
 .dark {
-  --heatmap-accent: oklch(0.78 0.13 150);
+  --heatmap-accent: oklch(0.72 0.16 293);
   --heatmap-empty-opacity: 0.1;
   --heatmap-min-opacity: 0.25;
   --heatmap-range-opacity: 0.7;
@@ -1060,10 +1108,10 @@ summary {
 /* Events timeline — fallback tag color when an event type has no user-picked
    color, plus the "today" marker color. */
 :root {
-  --event-default: oklch(0.4 0.07 150);
-  --event-today: oklch(0.78 0.13 90);
+  --event-default: oklch(0.55 0.16 293);
+  --event-today: oklch(0.68 0.11 190);
 }
 .dark {
-  --event-default: oklch(0.78 0.13 150);
-  --event-today: oklch(0.85 0.16 90);
+  --event-default: oklch(0.72 0.16 293);
+  --event-today: oklch(0.76 0.12 190);
 }

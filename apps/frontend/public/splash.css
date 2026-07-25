@@ -16,12 +16,22 @@ body {
 
 /* Simulate a Splash screen before react app mount */
 body {
-  background-color: #09090b;
-  background-image: url("/logo-gold.png");
+  background-color: #faf9fb;
+  background-image: url("/logo-fresh.svg");
   background-repeat: no-repeat;
   background-position: center center;
-  background-size: 100px auto;
+  background-size: 72px auto;
   background-attachment: fixed;
+}
+
+html.dark body {
+  background-color: #211f26;
+}
+
+/* Once React mounts, let the application own the canvas without retaining the
+   centered splash mark behind translucent surfaces. */
+body:has(#root:not(:empty)) {
+  background-image: none;
 }
 
 /*

@@ -203,12 +203,10 @@ export function DashboardContent() {
                 ) : (
                   <>
                     {gainLossAmount == null ? (
-                      <span className="text-muted-foreground lg:text-md text-sm font-light">
-                        N/A
-                      </span>
+                      <span className="text-muted-foreground text-sm">N/A</span>
                     ) : (
                       <GainAmount
-                        className="lg:text-md text-sm font-light"
+                        className="text-sm"
                         value={gainLossAmount}
                         currency={baseCurrency}
                         displayCurrency={false}
@@ -216,20 +214,14 @@ export function DashboardContent() {
                     )}
                     <div className="border-secondary my-1 border-r pr-2" />
                     {simpleReturn == null ? (
-                      <span className="text-muted-foreground lg:text-md text-sm font-light">
-                        N/A
-                      </span>
+                      <span className="text-muted-foreground text-sm">N/A</span>
                     ) : (
-                      <GainPercent
-                        className="lg:text-md text-sm font-light"
-                        value={simpleReturn}
-                        animated={true}
-                      />
+                      <GainPercent className="text-sm" value={simpleReturn} animated={true} />
                     )}
                   </>
                 )}
                 {selectedInterval && (
-                  <span className="lg:text-md text-muted-foreground ml-1 text-sm font-light">
+                  <span className="text-muted-foreground ml-1 text-sm">
                     {t(`ui:interval.${selectedInterval}`)}
                   </span>
                 )}
@@ -240,11 +232,11 @@ export function DashboardContent() {
       </div>
 
       <div
-        className="flex grow flex-col"
+        className="bg-surface-elevated/45 border-border/60 flex grow flex-col border-t"
         style={{
           backgroundImage: isNegative
-            ? `linear-gradient(to top, color-mix(in srgb, var(--destructive) 30%, transparent), color-mix(in srgb, var(--destructive) 15%, transparent) 50%, transparent 100%)`
-            : `linear-gradient(to top, color-mix(in srgb, var(--success) 30%, transparent), color-mix(in srgb, var(--success) 15%, transparent) 50%, transparent 100%)`,
+            ? `linear-gradient(to bottom, color-mix(in oklab, var(--destructive) 8%, transparent), transparent 28%)`
+            : `linear-gradient(to bottom, color-mix(in oklab, var(--success) 7%, transparent), transparent 28%)`,
         }}
       >
         <div className="h-70">
@@ -269,8 +261,8 @@ export function DashboardContent() {
           )}
         </div>
 
-        <div className="grow px-4 pb-[var(--mobile-nav-total-offset)] pt-14 md:px-6 md:pb-6 md:pt-12 lg:px-10 lg:pb-8 lg:pt-14">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-20">
+        <div className="grow px-4 pb-[var(--mobile-nav-total-offset)] pt-10 md:px-6 md:pb-6 md:pt-8 lg:px-8 lg:pb-8 lg:pt-10">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
             <div className="lg:col-span-2">
               <AccountsSummary
                 dateRange={dateRange}
@@ -279,7 +271,7 @@ export function DashboardContent() {
                 isLoadingCurrentValuations={isCurrentValuationLoading}
               />
             </div>
-            <div className="space-y-6 lg:col-span-1">
+            <div className="space-y-5 lg:col-span-1">
               <TopHoldings
                 holdings={holdings}
                 isLoading={isHoldingsLoading}

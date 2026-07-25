@@ -1,0 +1,371 @@
+{
+  "meta": {
+    "name": "Craft Agents Fresh Desktop",
+    "description": "A calm, cool-neutral desktop application language with restrained purple accents, low-contrast layers, compact controls, and softly raised utility surfaces.",
+    "source_references": [
+      "refs/craft-agents-oss-0.11.2/apps/electron/src/renderer/index.css",
+      "refs/craft-agents-oss-0.11.2/apps/electron/src/renderer/components/ui/button.tsx",
+      "refs/craft-agents-oss-0.11.2/apps/electron/src/renderer/components/app-shell/LeftSidebar.tsx",
+      "refs/craft-agents-oss-0.11.2/packages/shared/src/config/theme.ts"
+    ],
+    "created_at": "2026-07-24"
+  },
+  "design_system": {
+    "color": {
+      "palette_type": "cool-neutral monochromatic with semantic accents",
+      "primary": {
+        "hex": "#26242a",
+        "role": "Primary text, icons, and decisive buttons"
+      },
+      "secondary": {
+        "hex": "#f0eff2",
+        "role": "Selected rows, quiet controls, and grouped surfaces"
+      },
+      "accent": {
+        "hex": "#8b5fb3",
+        "role": "Brand moments, focus emphasis, links, and highlighted data"
+      },
+      "neutral": {
+        "scale": [
+          "#faf9fb",
+          "#f5f4f6",
+          "#efedf1",
+          "#dfdde2",
+          "#b8b5bd",
+          "#85818b",
+          "#5a5660",
+          "#3d3942",
+          "#26242a"
+        ],
+        "usage": "Near-white application canvas with foreground-derived translucent layers; stronger neutrals are reserved for text and controls."
+      },
+      "semantic": {
+        "success": "#278449",
+        "warning": "#c78a2c",
+        "error": "#d44a3f",
+        "info": "#8b5fb3"
+      },
+      "surface": {
+        "background": "#faf9fb",
+        "card": "#faf9fb",
+        "elevated": "#f7f6f8"
+      },
+      "contrast_strategy": "Dark-on-light dominant, with subtle foreground mixes for hierarchy and solid near-black only for primary actions"
+    },
+    "typography": {
+      "type_scale": {
+        "display": {
+          "size": "36px",
+          "weight": "650",
+          "line_height": "1.1",
+          "tracking": "-0.025em"
+        },
+        "heading_1": {
+          "size": "28px",
+          "weight": "650",
+          "line_height": "1.15",
+          "tracking": "-0.02em"
+        },
+        "heading_2": {
+          "size": "20px",
+          "weight": "600",
+          "line_height": "1.25",
+          "tracking": "-0.015em"
+        },
+        "heading_3": {
+          "size": "15px",
+          "weight": "600",
+          "line_height": "1.35",
+          "tracking": "-0.005em"
+        },
+        "body": {
+          "size": "15px",
+          "weight": "400",
+          "line_height": "1.5",
+          "tracking": "0em"
+        },
+        "body_small": {
+          "size": "13px",
+          "weight": "400",
+          "line_height": "1.45",
+          "tracking": "0em"
+        },
+        "caption": {
+          "size": "12px",
+          "weight": "500",
+          "line_height": "1.35",
+          "tracking": "0.005em"
+        },
+        "overline": {
+          "size": "11px",
+          "weight": "600",
+          "line_height": "1.3",
+          "tracking": "0.06em"
+        }
+      },
+      "font_families": {
+        "heading": "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif",
+        "body": "system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif",
+        "mono": "JetBrains Mono, SFMono-Regular, Menlo, monospace"
+      },
+      "font_style_notes": "Neutral system sans throughout; hierarchy comes from weight, size, and opacity rather than serif contrast."
+    },
+    "spacing": {
+      "base_unit": "4px",
+      "scale": ["4px", "8px", "12px", "16px", "20px", "24px", "32px", "48px"],
+      "content_density": "comfortable-compact",
+      "section_rhythm": "Tight within control groups, 16 to 24px between related sections, and 32 to 48px around primary content regions"
+    },
+    "layout": {
+      "grid_system": "Flexible application shell with a fixed sidebar and fluid content panel",
+      "max_content_width": "1440px",
+      "columns": "12-column content grid inside a sidebar-plus-main shell",
+      "gutter": "16px desktop, 12px mobile",
+      "breakpoints": ["640px", "768px", "1024px", "1280px"],
+      "alignment_tendency": "strict grid with compact left-aligned navigation and calm centered data regions"
+    },
+    "shape": {
+      "border_radius": {
+        "small": "6px",
+        "medium": "8px",
+        "large": "12px",
+        "pill": "999px"
+      },
+      "border_usage": "Subtle 1px foreground-derived rings; avoid strong outlines and use borderless hover layers for navigation",
+      "divider_style": "1px foreground at 5 to 8 percent opacity"
+    },
+    "elevation": {
+      "shadow_style": "Layered, soft, and extremely restrained with a 1px ambient ring",
+      "levels": {
+        "low": "0 0 0 1px rgb(38 36 42 / 0.06), 0 1px 1px rgb(0 0 0 / 0.05), 0 3px 3px -1.5px rgb(0 0 0 / 0.05)",
+        "medium": "0 0 0 1px rgb(38 36 42 / 0.07), 0 3px 8px rgb(0 0 0 / 0.07), 0 12px 24px -12px rgb(0 0 0 / 0.10)",
+        "high": "0 0 0 1px rgb(38 36 42 / 0.08), 0 8px 24px rgb(0 0 0 / 0.10), 0 24px 48px -20px rgb(0 0 0 / 0.16)"
+      },
+      "depth_cues": "Foreground-derived surface tint, ambient ring, and short diffuse shadows"
+    },
+    "iconography": {
+      "style": "Minimal rounded line icons with occasional duotone accents",
+      "stroke_weight": "1.5 to 2px",
+      "size_scale": ["14px", "16px", "18px", "20px"],
+      "preferred_set": "Lucide-style icons"
+    },
+    "motion": {
+      "easing": "cubic-bezier(0.2, 0.8, 0.2, 1)",
+      "duration_scale": {
+        "micro": "120ms",
+        "normal": "180ms",
+        "macro": "280ms"
+      },
+      "entrance_pattern": "Short opacity and 4px translate transitions for floating layers",
+      "exit_pattern": "Faster fade with minimal scale reduction",
+      "philosophy": "Minimal functional, smooth, and never decorative"
+    },
+    "components": {
+      "button_style": "8px corners, 36px default height, near-black primary, 5 percent neutral secondary, subtle color-only hover",
+      "input_style": "8px corners, quiet tinted fill, ambient 1px ring, compact 36 to 40px height, purple-tinted focus ring",
+      "card_style": "Canvas-colored 8 to 12px rounded surface with a low ambient shadow instead of a visible border",
+      "navigation_pattern": "Fixed cool-neutral sidebar with compact 13px rows, 6px corners, and a 7 percent foreground active fill",
+      "modal_style": "8 to 12px rounded elevated canvas surface with layered diffuse shadow and subdued overlay",
+      "list_style": "Borderless rows grouped by spacing; hover and active states use 3 to 7 percent foreground fills",
+      "component_notes": "Use opacity and elevation sparingly; reserve pills for filters, tags, and status rather than every action."
+    }
+  },
+  "design_style": {
+    "aesthetic": {
+      "mood": ["fresh", "calm", "focused", "approachable", "precise"],
+      "visual_metaphor": "A quiet, well-lit desktop workspace made from lightly stacked sheets",
+      "era_influence": "Contemporary native macOS productivity software",
+      "genre": "Modern desktop productivity SaaS",
+      "personality_traits": ["capable", "unfussy", "thoughtful", "lightweight"],
+      "adjectives": ["cool", "airy", "restrained", "soft", "compact"]
+    },
+    "visual_language": {
+      "complexity": "moderate",
+      "ornamentation": "subtle accents",
+      "whitespace_usage": "Comfortable page whitespace paired with compact controls",
+      "visual_weight_distribution": "Content and data hold the weight; chrome recedes through low contrast",
+      "focal_strategy": "Progressive emphasis through typographic weight and sparse purple highlights",
+      "contrast_level": "Medium overall with high-contrast text and low-contrast surface separation",
+      "texture_usage": "No texture; depth is produced through translucent color mixes and restrained shadows"
+    },
+    "composition": {
+      "hierarchy_method": "Typographic hierarchy, opacity steps, and spatial grouping",
+      "balance_type": "Asymmetric application shell with balanced modular content",
+      "flow_direction": "Left navigation into top-to-bottom content scanning",
+      "grouping_strategy": "Proximity first, then gentle surface elevation only where containment helps",
+      "negative_space_role": "Separates functional zones and prevents dense financial data from feeling heavy"
+    },
+    "imagery": {
+      "photo_treatment": "Rare; when used, softly rounded and naturally colored",
+      "illustration_style": "Simple geometric or line-based utility illustrations",
+      "graphic_elements": "Small status dots, muted data fills, clean charts, and restrained purple accents",
+      "pattern_usage": "None",
+      "image_shape": "8 to 12px rounded rectangles"
+    },
+    "interaction_feel": {
+      "feedback_style": "Immediate color and opacity response with clear focus rings",
+      "hover_behavior": "2 to 5 percent foreground tint; important surfaces gain a minimal ambient shadow",
+      "transition_personality": "snappy smooth glide",
+      "loading_style": "Low-contrast skeletons without dramatic shimmer",
+      "microinteraction_density": "low to medium"
+    },
+    "brand_voice_in_ui": {
+      "tone": "Clear, calm, and helpful",
+      "formality": "Conversational professional",
+      "cta_style": "Direct imperative",
+      "empty_state_approach": "Concise explanation plus one obvious next action",
+      "error_tone": "Plain-language and actionable without alarmist styling"
+    }
+  },
+  "visual_effects": {
+    "overview": {
+      "effect_intensity": "subtle-accent",
+      "performance_tier": "lightweight",
+      "fallback_strategy": "Disable motion and blur while preserving solid surfaces",
+      "primary_technology": "CSS only"
+    },
+    "background_effects": {
+      "type": "none",
+      "description": "Solid cool-neutral canvas with optional barely tinted local gradients for data context",
+      "technology": "CSS backgrounds",
+      "params": {
+        "color_palette": ["#faf9fb", "#f5f4f6"],
+        "speed": "0",
+        "density": "none",
+        "opacity": "1",
+        "blend_mode": "normal"
+      }
+    },
+    "particle_systems": {
+      "enabled": false,
+      "type": "none",
+      "description": "No particles",
+      "technology": "none",
+      "params": {
+        "count": "0",
+        "shape": "none",
+        "size_range": "0",
+        "movement_pattern": "none",
+        "color_behavior": "none",
+        "interaction": "none",
+        "spawn_area": "none"
+      }
+    },
+    "3d_elements": {
+      "enabled": false,
+      "type": "none",
+      "description": "No 3D rendering",
+      "technology": "none",
+      "params": {
+        "renderer": "none",
+        "lighting": "none",
+        "camera": "none",
+        "materials": "none",
+        "geometry": "none",
+        "post_processing": ["none"],
+        "interaction_model": "none"
+      }
+    },
+    "shader_effects": {
+      "enabled": false,
+      "type": "none",
+      "description": "No shader effects",
+      "technology": "none",
+      "params": {
+        "uniforms": ["none"],
+        "vertex_manipulation": "none",
+        "fragment_output": "none",
+        "noise_type": "none",
+        "distortion": "none"
+      }
+    },
+    "scroll_effects": {
+      "parallax": {
+        "enabled": false,
+        "layers": "0",
+        "depth_range": "0",
+        "speed_curve": "none"
+      },
+      "scroll_triggered_animations": {
+        "enabled": false,
+        "trigger_points": ["none"],
+        "animation_type": "none",
+        "scrub_behavior": "none"
+      },
+      "scroll_morphing": {
+        "enabled": false,
+        "description": "No scroll morphing"
+      }
+    },
+    "text_effects": {
+      "type": "none",
+      "description": "Typography remains stable; only loading placeholders may shimmer subtly",
+      "technology": "CSS",
+      "params": {
+        "split_strategy": "none",
+        "animation_per_unit": "none",
+        "stagger": "0",
+        "effect_style": "none"
+      }
+    },
+    "cursor_effects": {
+      "enabled": false,
+      "type": "none",
+      "description": "Native cursor behavior",
+      "params": {
+        "shape": "system",
+        "size": "system",
+        "blend_mode": "normal",
+        "trail": "none",
+        "interaction_zone": "standard controls"
+      }
+    },
+    "image_effects": {
+      "type": "none",
+      "description": "Images use simple opacity and scale hover feedback only when interactive",
+      "technology": "CSS",
+      "params": {
+        "filter_pipeline": ["none"],
+        "hover_transform": "scale(1.01)",
+        "reveal_animation": "120ms opacity",
+        "distortion_type": "none"
+      }
+    },
+    "glassmorphism_neumorphism": {
+      "enabled": true,
+      "style": "frosted-layers",
+      "params": {
+        "blur_radius": "16px only on floating navigation and overlays",
+        "transparency": "0.92",
+        "border_treatment": "1px foreground at 6 percent opacity",
+        "shadow_type": "soft layered ambient shadow",
+        "light_source_angle": "top-left"
+      }
+    },
+    "canvas_drawings": {
+      "enabled": false,
+      "type": "none",
+      "description": "Charts remain SVG-based application data visualizations",
+      "technology": "none",
+      "params": {
+        "draw_method": "none",
+        "animation_loop": "none",
+        "color_scheme": ["semantic chart tokens"],
+        "responsiveness": "container responsive",
+        "interaction": "none"
+      }
+    },
+    "svg_animations": {
+      "enabled": false,
+      "type": "none",
+      "description": "Icons use CSS transforms rather than SVG path animation",
+      "params": {
+        "animation_method": "none",
+        "path_morphing": "none",
+        "stroke_animation": "none",
+        "filter_effects": "none"
+      }
+    },
+    "composite_notes": "The signature effect is not spectacle but disciplined layering: a cool near-white canvas, 3 to 7 percent foreground fills, 6 to 8 percent ambient rings, and short diffuse shadows. Respect prefers-reduced-motion and remove backdrop blur where unsupported."
+  }
+}

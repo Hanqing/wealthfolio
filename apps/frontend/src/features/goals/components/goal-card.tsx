@@ -175,7 +175,7 @@ export function GoalCard({ goal }: { goal: Goal }) {
           {/* Bottom-left italic quote */}
           {quote && (
             <div className="absolute bottom-2.5 left-3 right-3">
-              <span className="line-clamp-1 block font-serif text-[11px] italic text-white/95 drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]">
+              <span className="line-clamp-1 block text-[11px] font-medium text-white/95 drop-shadow-[0_1px_2px_rgba(0,0,0,0.7)]">
                 &ldquo;{quote}&rdquo;
               </span>
             </div>
@@ -187,13 +187,13 @@ export function GoalCard({ goal }: { goal: Goal }) {
           {/* Title + % */}
           <div className="flex items-start justify-between gap-3">
             <div className="min-w-0 flex-1">
-              <h3 className="truncate font-serif text-[19px] leading-tight">{goal.title}</h3>
+              <h3 className="truncate text-[19px] font-semibold leading-tight">{goal.title}</h3>
               <p className="text-muted-foreground mt-0.5 text-[9px] tracking-[0.15em]">
                 {targetDateStr ? `${targetDateStr} · ${timeLeftStr}` : timeLeftStr}
               </p>
             </div>
             <div className="text-right">
-              <div className={cn("font-serif text-[20px] leading-none", accentClass)}>
+              <div className={cn("text-[20px] font-semibold leading-none", accentClass)}>
                 {progressPct}
                 <span className="text-[11px]">%</span>
               </div>
@@ -206,17 +206,13 @@ export function GoalCard({ goal }: { goal: Goal }) {
           {/* Amounts row: saved · remaining */}
           <div className="mt-2.5 flex items-end justify-between gap-3">
             <div>
-              <div className="font-serif text-[14px] font-semibold tabular-nums">
-                {currentDisplay}
-              </div>
+              <div className="text-[14px] font-semibold tabular-nums">{currentDisplay}</div>
               <div className="text-muted-foreground mt-0.5 text-[10px]">
                 {t("goals:card.saved_of")} <span className="tabular-nums">{targetDisplay}</span>
               </div>
             </div>
             <div className="text-right">
-              <div className="font-serif text-[14px] font-semibold tabular-nums">
-                {remainingDisplay}
-              </div>
+              <div className="text-[14px] font-semibold tabular-nums">{remainingDisplay}</div>
               <div className="text-muted-foreground mt-0.5 text-[10px]">
                 {hasRemaining ? t("goals:card.remaining") : t("goals:card.target_met")}
               </div>

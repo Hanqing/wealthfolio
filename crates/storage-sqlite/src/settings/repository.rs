@@ -183,7 +183,7 @@ impl SettingsRepositoryTrait for SettingsRepository {
                 // Return default values for known settings
                 let default_value = match setting_key_param {
                     "theme" => "light",
-                    "font" => "font-mono",
+                    "font" => "font-sans",
                     "language" => "en",
                     "timezone" => "",
                     "onboarding_completed" => "false",

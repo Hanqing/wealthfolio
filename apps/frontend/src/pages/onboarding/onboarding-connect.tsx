@@ -5,9 +5,9 @@ import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
 
 const colorClasses = {
-  orange: {
-    bg: "bg-orange-100 dark:bg-orange-900/30",
-    icon: "text-orange-600 dark:text-orange-400",
+  brand: {
+    bg: "bg-brand/10",
+    icon: "text-brand",
   },
   blue: {
     bg: "bg-blue-100 dark:bg-blue-900/30",
@@ -27,7 +27,7 @@ export const OnboardingConnect: React.FC = () => {
         icon: Icons.CloudSync2,
         title: t("onboarding:connect.features.brokerageSync.title"),
         description: t("onboarding:connect.features.brokerageSync.description"),
-        color: "orange",
+        color: "brand",
       },
       {
         icon: Icons.Devices,

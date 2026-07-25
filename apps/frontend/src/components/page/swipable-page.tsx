@@ -45,7 +45,7 @@ function NavigationPills({
   const layoutId = React.useId();
 
   return (
-    <nav className="bg-muted/60 inline-flex items-center rounded-full p-1">
+    <nav className="bg-foreground/[0.045] inline-flex items-center rounded-lg p-0.5">
       {views.map((view) => {
         const isActive = currentView === view.value;
         const IconComponent = view.icon;
@@ -56,7 +56,7 @@ function NavigationPills({
             type="button"
             onClick={() => onViewChange(view.value)}
             className={cn(
-              "relative flex cursor-pointer items-center gap-2 rounded-full px-3 py-1.5 text-sm font-medium transition-colors duration-200",
+              "relative flex cursor-pointer items-center gap-2 rounded-md px-3 py-1.5 text-sm font-medium transition-colors duration-150",
               "focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-2",
               isActive ? "text-foreground" : "text-muted-foreground hover:text-foreground/80",
             )}
@@ -65,7 +65,7 @@ function NavigationPills({
             {isActive && (
               <motion.div
                 layoutId={`nav-pill-${layoutId}`}
-                className="bg-background absolute inset-0 rounded-full shadow-sm"
+                className="bg-background shadow-minimal absolute inset-0 rounded-md"
                 initial={false}
                 transition={{
                   type: "spring",
@@ -102,7 +102,7 @@ function MobileNavigation({
   return (
     <div
       className={cn(
-        "bg-muted/50 flex items-center gap-0.5 rounded-full p-1 backdrop-blur-sm",
+        "bg-foreground/[0.045] flex items-center gap-0.5 rounded-lg p-0.5",
         compact && "min-w-0 max-w-full",
       )}
     >
@@ -116,7 +116,7 @@ function MobileNavigation({
             type="button"
             onClick={() => onViewChange(item.value)}
             className={cn(
-              "relative flex cursor-pointer items-center justify-center gap-1.5 rounded-full py-1.5 text-sm font-medium transition-colors duration-200",
+              "relative flex cursor-pointer items-center justify-center gap-1.5 rounded-md py-1.5 text-sm font-medium transition-colors duration-150",
               "focus-visible:ring-ring focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2",
               compact ? "px-2" : "px-3",
               isActive ? "min-w-0" : "shrink-0",
@@ -128,7 +128,7 @@ function MobileNavigation({
             {isActive && (
               <motion.div
                 layoutId={`mobile-nav-bg-${layoutId}`}
-                className="bg-background absolute inset-0 rounded-full shadow-sm"
+                className="bg-background shadow-minimal absolute inset-0 rounded-md"
                 initial={false}
                 transition={{
                   type: "spring",
@@ -292,7 +292,7 @@ export function SwipablePage({
           /* Desktop: Navigation at top center + content below */
           <div className="hidden h-full flex-col md:flex">
             {/* Header with Navigation and Actions */}
-            <div className="flex shrink-0 items-center justify-between gap-4 px-2 pb-3 pt-4 lg:px-4">
+            <div className="border-border/70 bg-background/90 flex shrink-0 items-center justify-between gap-4 border-b px-4 py-3 backdrop-blur-xl">
               <div className="flex items-center gap-3">
                 {title && <h1 className="text-muted-foreground text-sm font-medium">{title}</h1>}
                 <NavigationPills

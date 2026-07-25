@@ -37,9 +37,9 @@ type Provider = "google" | "email";
 // ─────────────────────────────────────────────────────────────────────────────
 
 const featureColors = {
-  orange: {
-    bg: "bg-orange-100 dark:bg-orange-900/30",
-    icon: "text-orange-600 dark:text-orange-400",
+  brand: {
+    bg: "bg-brand/10",
+    icon: "text-brand",
   },
   green: {
     bg: "bg-green-100 dark:bg-green-900/30",
@@ -58,7 +58,7 @@ function FeaturesSection({ t }: { t: TFunction }) {
         icon: Icons.CloudSync2,
         title: t("auth:connect.features.brokerSync.title"),
         description: t("auth:connect.features.brokerSync.description"),
-        color: "orange",
+        color: "brand",
       },
       {
         icon: Icons.Devices,

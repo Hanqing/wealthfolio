@@ -79,11 +79,7 @@ const OnboardingPage = () => {
       <header className="flex-none px-4 pt-8 sm:px-6 sm:pt-12">
         <div className="flex flex-col items-center">
           {/* Logo */}
-          <img
-            alt="Wealthfolio"
-            className="mb-3 h-16 w-16 sm:h-20 sm:w-20"
-            src="/logo-vantage.png"
-          />
+          <img alt="Wealthfolio" className="mb-3 h-16 w-16 sm:h-20 sm:w-20" src="/logo-fresh.svg" />
 
           {/* Progress indicators */}
           <div className="flex gap-2">
@@ -104,7 +100,7 @@ const OnboardingPage = () => {
       </header>
 
       {/* Main content - centered vertically in remaining space */}
-      <main className="flex flex-1 flex-col items-center justify-center overflow-y-auto px-4 sm:px-6">
+      <main className="flex flex-1 flex-col items-center overflow-y-auto px-4 py-6 sm:px-6 sm:py-8">
         <AnimatePresence mode="wait" initial={false}>
           <motion.div
             key={currentStep}
@@ -112,7 +108,7 @@ const OnboardingPage = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="flex w-full max-w-4xl justify-center"
+            className="my-auto flex w-full max-w-4xl justify-center"
           >
             {currentStep === 1 && <OnboardingStep1 />}
             {currentStep === 2 && (

@@ -30,8 +30,6 @@ import { BreakdownTable } from "./components/breakdown-table";
 import { CategoryDetailSheet } from "./components/category-detail-sheet";
 import { MomentumCard } from "./components/momentum-card";
 import {
-  THEME_COLOR,
-  THEME_COLOR_LIGHT,
   averageMonthlyChange,
   computeMomentum,
   computeVelocity,
@@ -243,21 +241,21 @@ export function NetWorthContent() {
               ) : (
                 <>
                   <GainAmount
-                    className="lg:text-md text-sm font-light"
+                    className="lg:text-md text-sm"
                     value={gainLossAmount}
                     currency={currency}
                     displayCurrency={false}
                   />
                   <div className="border-secondary my-1 border-r pr-2" />
                   <GainPercent
-                    className="lg:text-md text-sm font-light"
+                    className="lg:text-md text-sm"
                     value={gainLossPercent}
                     animated={true}
                   />
                 </>
               )}
               {periodCode && (
-                <span className="lg:text-md text-muted-foreground ml-1 text-sm font-light">
+                <span className="lg:text-md text-muted-foreground ml-1 text-sm">
                   {t(`ui:interval.${periodCode}`)}
                 </span>
               )}
@@ -268,12 +266,12 @@ export function NetWorthContent() {
 
       {/* Wrapper: chart + content with continuous gradient */}
       <div
-        className="flex grow flex-col"
+        className="bg-surface-elevated/45 border-border/60 flex grow flex-col border-t"
         style={{
           backgroundImage:
             (parsedData?.netWorth ?? 0) < 0
-              ? `linear-gradient(to top, color-mix(in srgb, var(--destructive) 30%, transparent), color-mix(in srgb, var(--destructive) 15%, transparent) 50%, transparent 100%)`
-              : `linear-gradient(to top, ${THEME_COLOR.replace(")", " / 0.30)")}, ${THEME_COLOR.replace(")", " / 0.15)")} 50%, transparent 100%)`,
+              ? `linear-gradient(to bottom, color-mix(in oklab, var(--destructive) 8%, transparent), transparent 28%)`
+              : `linear-gradient(to bottom, color-mix(in oklab, var(--success) 7%, transparent), transparent 28%)`,
         }}
       >
         {/* Chart section */}
@@ -306,8 +304,8 @@ export function NetWorthContent() {
         </div>
 
         {/* Content section */}
-        <div className="grow px-4 pb-[var(--mobile-nav-total-offset)] pt-14 md:px-6 md:pb-6 md:pt-12 lg:px-10 lg:pb-8 lg:pt-14">
-          <div className="grid grid-cols-1 gap-8 lg:grid-cols-3 lg:gap-12">
+        <div className="grow px-4 pb-[var(--mobile-nav-total-offset)] pt-10 md:px-6 md:pb-6 md:pt-8 lg:px-8 lg:pb-8 lg:pt-10">
+          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
             {/* Left column: Breakdown */}
             <div className="lg:col-span-2">
               {isLoading || isHistoryLoading ? (
@@ -330,10 +328,7 @@ export function NetWorthContent() {
                   onSelect={setSelected}
                 />
               ) : (
-                <div
-                  className="rounded-xl border border-orange-200/50 p-6 text-center md:p-8 dark:border-orange-800/50"
-                  style={{ backgroundColor: THEME_COLOR_LIGHT }}
-                >
+                <div className="border-brand/15 bg-brand/[0.06] rounded-xl border p-6 text-center md:p-8">
                   <p className="text-sm">{t("insights:networth.no_assets_found")}</p>
                   <Link
                     to="/holdings"
@@ -347,7 +342,7 @@ export function NetWorthContent() {
             </div>
 
             {/* Right column: insight cards */}
-            <div className="space-y-6 lg:col-span-1">
+            <div className="space-y-5 lg:col-span-1">
               {velocity && (
                 <VelocityCard
                   velocity={velocity}

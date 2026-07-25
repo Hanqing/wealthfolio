@@ -30,8 +30,14 @@ export interface ChartPoint {
 }
 
 export const PROJECTED_CHART_COLORS = {
-  onTrack: { fill: "hsl(92, 24%, 70%)", stroke: "hsl(91, 43%, 29%)" },
-  offTrack: { fill: "hsl(38, 75%, 50%)", stroke: "hsl(38, 75%, 50%)" },
+  onTrack: {
+    fill: "color-mix(in oklab, var(--success) 22%, transparent)",
+    stroke: "var(--success)",
+  },
+  offTrack: {
+    fill: "color-mix(in oklab, var(--destructive) 18%, transparent)",
+    stroke: "var(--destructive)",
+  },
 } as const;
 
 export const CHART_COLORS = {
@@ -419,7 +425,7 @@ export function RetirementChart({
             animationDuration={300}
           />
 
-          {/* Portfolio — filled golden area */}
+          {/* Portfolio — subtle semantic area */}
           <Area
             type="linear"
             dataKey="portfolio"

@@ -1,10 +1,11 @@
-import appLogo from "@/assets/logo-rounded.png";
 import { useTranslation } from "react-i18next";
+
+const appLogo = "/logo-fresh.svg";
 
 export function ConnectFlowDiagram() {
   const { t } = useTranslation();
   return (
-    <div className="bg-card border-border rounded-2xl border border-dashed p-4 sm:p-5">
+    <div className="bg-background shadow-minimal rounded-xl p-4 sm:p-5">
       <svg viewBox="0 -8 730 175" className="h-auto w-full" xmlns="http://www.w3.org/2000/svg">
         {/* ========== YOUR DEVICE (Left) ========== */}
         <g transform="translate(20, 40)">
@@ -15,7 +16,7 @@ export function ConnectFlowDiagram() {
             width="180"
             height="70"
             rx="16"
-            className="fill-white stroke-[#e8e4dc] dark:fill-white/5 dark:stroke-white/10"
+            className="fill-background stroke-foreground/10 dark:fill-foreground/5"
             strokeWidth="1"
           />
           {/* Logo */}
@@ -28,34 +29,22 @@ export function ConnectFlowDiagram() {
             preserveAspectRatio="xMidYMid slice"
           />
           {/* Text */}
-          <text
-            x="68"
-            y="32"
-            className="fill-[#3d3d3d] dark:fill-white/90"
-            fontSize="14"
-            fontWeight="500"
-          >
+          <text x="68" y="32" className="fill-foreground" fontSize="14" fontWeight="500">
             {t("connect:flow.yourDevice")}
           </text>
-          <text x="68" y="50" className="fill-[#9a9a9a] dark:fill-white/50" fontSize="12">
+          <text x="68" y="50" className="fill-muted-foreground" fontSize="12">
             {t("connect:flow.localDatabase")}
           </text>
 
           {/* Labels below */}
-          <text
-            x="90"
-            y="100"
-            textAnchor="middle"
-            className="fill-[#504f4f] dark:fill-white/50"
-            fontSize="12"
-          >
+          <text x="90" y="100" textAnchor="middle" className="fill-muted-foreground" fontSize="12">
             Wealthfolio
           </text>
           <text
             x="90"
             y="116"
             textAnchor="middle"
-            className="fill-[#b5b0a6] dark:fill-white/30"
+            className="fill-muted-foreground/60"
             fontSize="10"
           >
             {t("connect:flow.dataStaysHere")}
@@ -70,12 +59,12 @@ export function ConnectFlowDiagram() {
             fill="none"
             strokeWidth="1.5"
             strokeDasharray="5 5"
-            className="stroke-[#c5c0b6] dark:stroke-white/20"
+            className="stroke-foreground/15"
           />
           {/* Arrow */}
-          <polygon points="8,-5 8,5 0,0" className="fill-[#c5c0b6] dark:fill-white/30" />
+          <polygon points="8,-5 8,5 0,0" className="fill-foreground/20" />
           {/* Animated dot */}
-          <circle r="4" className="fill-[#8b7355] dark:fill-[#a69580]">
+          <circle r="4" className="fill-brand">
             <animateMotion dur="2.5s" repeatCount="indefinite" path="M 70 0 L 0 0" />
           </circle>
         </g>
@@ -107,7 +96,7 @@ export function ConnectFlowDiagram() {
             x="32"
             y="100"
             textAnchor="middle"
-            className="fill-[#5a5347] dark:fill-white/70"
+            className="fill-foreground/80"
             fontSize="14"
             fontWeight="700"
           >
@@ -123,10 +112,10 @@ export function ConnectFlowDiagram() {
             fill="none"
             strokeWidth="1.5"
             strokeDasharray="5 5"
-            className="stroke-[#c5c0b6] dark:stroke-white/20"
+            className="stroke-foreground/15"
           />
           {/* Animated dot */}
-          <circle r="4" className="fill-[#8b7355] dark:fill-[#a69580]">
+          <circle r="4" className="fill-brand">
             <animateMotion dur="2.5s" repeatCount="indefinite" begin="0.5s" path="M 70 0 L 0 0" />
           </circle>
         </g>
@@ -140,35 +129,29 @@ export function ConnectFlowDiagram() {
             width="56"
             height="56"
             rx="16"
-            className="fill-white stroke-[#e8e4dc] dark:fill-white/5 dark:stroke-white/10"
+            className="fill-background stroke-foreground/10 dark:fill-foreground/5"
             strokeWidth="1"
           />
           {/* Arrows icon (data sync) */}
           <g transform="translate(12, 12) scale(0.125)">
             <path
               d="M224,48V208a16,16,0,0,1-16,16H48a16,16,0,0,1-16-16V48A16,16,0,0,1,48,32H208A16,16,0,0,1,224,48Z"
-              className="fill-[#f5f3ed] dark:fill-white/10"
+              className="fill-foreground/5"
             />
             <path
               d="M90.34,69.66a8,8,0,0,1,11.32-11.32L120,76.69V24a8,8,0,0,1,16,0V76.69l18.34-18.35a8,8,0,0,1,11.32,11.32l-32,32a8,8,0,0,1-11.32,0Zm43.32,84.68a8,8,0,0,0-11.32,0l-32,32a8,8,0,0,0,11.32,11.32L120,179.31V232a8,8,0,0,0,16,0V179.31l18.34,18.35a8,8,0,0,0,11.32-11.32ZM232,120H179.31l18.35-18.34a8,8,0,0,0-11.32-11.32l-32,32a8,8,0,0,0,0,11.32l32,32a8,8,0,0,0,11.32-11.32L179.31,136H232a8,8,0,0,0,0-16Zm-130.34,2.34-32-32a8,8,0,0,0-11.32,11.32L76.69,120H24a8,8,0,0,0,0,16H76.69L58.34,154.34a8,8,0,0,0,11.32,11.32l32-32A8,8,0,0,0,101.66,122.34Z"
-              className="fill-[#9a9a9a] dark:fill-white/50"
+              className="fill-muted-foreground"
             />
           </g>
           {/* Labels below */}
-          <text
-            x="28"
-            y="88"
-            textAnchor="middle"
-            className="fill-[#504f4f] dark:fill-white/50"
-            fontSize="12"
-          >
+          <text x="28" y="88" textAnchor="middle" className="fill-muted-foreground" fontSize="12">
             {t("connect:flow.aggregators")}
           </text>
           <text
             x="28"
             y="104"
             textAnchor="middle"
-            className="fill-[#b5b0a6] dark:fill-white/30"
+            className="fill-muted-foreground/60"
             fontSize="10"
           >
             (e.g. SnapTrade)
@@ -184,7 +167,7 @@ export function ConnectFlowDiagram() {
             fill="none"
             strokeWidth="1.5"
             strokeDasharray="5 5"
-            className="stroke-[#c5c0b6] dark:stroke-white/20"
+            className="stroke-foreground/15"
           />
           {/* Middle line to Banks (y=0, aligned with Aggregators) */}
           <path
@@ -193,7 +176,7 @@ export function ConnectFlowDiagram() {
             fill="none"
             strokeWidth="1.5"
             strokeDasharray="5 5"
-            className="stroke-[#c5c0b6] dark:stroke-white/20"
+            className="stroke-foreground/15"
           />
           {/* Bottom curve to Crypto (y=+58) */}
           <path
@@ -202,10 +185,10 @@ export function ConnectFlowDiagram() {
             fill="none"
             strokeWidth="1.5"
             strokeDasharray="5 5"
-            className="stroke-[#c5c0b6] dark:stroke-white/20"
+            className="stroke-foreground/15"
           />
           {/* Animated dots - using same paths reversed */}
-          <circle r="4" className="fill-[#8b7355] dark:fill-[#a69580]">
+          <circle r="4" className="fill-brand">
             <animateMotion
               dur="3s"
               repeatCount="indefinite"
@@ -213,10 +196,10 @@ export function ConnectFlowDiagram() {
               path="M 95 -58 C 55 -58, 40 0, 0 0"
             />
           </circle>
-          <circle r="4" className="fill-[#8b7355] dark:fill-[#a69580]">
+          <circle r="4" className="fill-brand">
             <animateMotion dur="3s" repeatCount="indefinite" begin="0.4s" path="M 95 0 L 0 0" />
           </circle>
-          <circle r="4" className="fill-[#8b7355] dark:fill-[#a69580]">
+          <circle r="4" className="fill-brand">
             <animateMotion
               dur="3s"
               repeatCount="indefinite"
@@ -235,18 +218,11 @@ export function ConnectFlowDiagram() {
             width="150"
             height="50"
             rx="16"
-            className="fill-white stroke-[#e8e4dc] dark:fill-white/5 dark:stroke-white/10"
+            className="fill-background stroke-foreground/10 dark:fill-foreground/5"
             strokeWidth="1"
           />
           {/* Icon background */}
-          <rect
-            x="12"
-            y="9"
-            width="32"
-            height="32"
-            rx="10"
-            className="fill-[#f5f3ed] dark:fill-white/10"
-          />
+          <rect x="12" y="9" width="32" height="32" rx="10" className="fill-foreground/5" />
           {/* Landmark icon (bank building) */}
           <g transform="translate(19, 15)">
             <path
@@ -255,17 +231,11 @@ export function ConnectFlowDiagram() {
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="stroke-[#9a9a9a] dark:stroke-white/50"
+              className="stroke-muted-foreground"
               transform="scale(0.8)"
             />
           </g>
-          <text
-            x="56"
-            y="30"
-            className="fill-[#3d3d3d] dark:fill-white/80"
-            fontSize="13"
-            fontWeight="500"
-          >
+          <text x="56" y="30" className="fill-foreground/80" fontSize="13" fontWeight="500">
             {t("connect:flow.brokerages")}
           </text>
         </g>
@@ -278,18 +248,11 @@ export function ConnectFlowDiagram() {
             width="150"
             height="50"
             rx="16"
-            className="fill-white stroke-[#e8e4dc] dark:fill-white/5 dark:stroke-white/10"
+            className="fill-background stroke-foreground/10 dark:fill-foreground/5"
             strokeWidth="1"
           />
           {/* Icon background */}
-          <rect
-            x="12"
-            y="9"
-            width="32"
-            height="32"
-            rx="10"
-            className="fill-[#f5f3ed] dark:fill-white/10"
-          />
+          <rect x="12" y="9" width="32" height="32" rx="10" className="fill-foreground/5" />
           {/* Building icon */}
           <g transform="translate(19, 15)">
             <path
@@ -298,17 +261,11 @@ export function ConnectFlowDiagram() {
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="stroke-[#9a9a9a] dark:stroke-white/50"
+              className="stroke-muted-foreground"
               transform="scale(0.75)"
             />
           </g>
-          <text
-            x="56"
-            y="30"
-            className="fill-[#3d3d3d] dark:fill-white/80"
-            fontSize="13"
-            fontWeight="500"
-          >
+          <text x="56" y="30" className="fill-foreground/80" fontSize="13" fontWeight="500">
             {t("connect:flow.banks")}
           </text>
         </g>
@@ -321,18 +278,11 @@ export function ConnectFlowDiagram() {
             width="150"
             height="50"
             rx="16"
-            className="fill-white stroke-[#e8e4dc] dark:fill-white/5 dark:stroke-white/10"
+            className="fill-background stroke-foreground/10 dark:fill-foreground/5"
             strokeWidth="1"
           />
           {/* Icon background */}
-          <rect
-            x="12"
-            y="9"
-            width="32"
-            height="32"
-            rx="10"
-            className="fill-[#f5f3ed] dark:fill-white/10"
-          />
+          <rect x="12" y="9" width="32" height="32" rx="10" className="fill-foreground/5" />
           {/* Bitcoin icon */}
           <g transform="translate(21, 16)">
             <path
@@ -341,25 +291,19 @@ export function ConnectFlowDiagram() {
               strokeWidth="1.5"
               strokeLinecap="round"
               strokeLinejoin="round"
-              className="stroke-[#9a9a9a] dark:stroke-white/50"
+              className="stroke-muted-foreground"
               transform="scale(0.7)"
             />
           </g>
-          <text
-            x="56"
-            y="30"
-            className="fill-[#3d3d3d] dark:fill-white/80"
-            fontSize="13"
-            fontWeight="500"
-          >
+          <text x="56" y="30" className="fill-foreground/80" fontSize="13" fontWeight="500">
             {t("connect:flow.crypto")}
           </text>
         </g>
 
         {/* Connection dots at line endpoints (y=17, 75, 133) */}
-        <circle cx="555" cy="17" r="4" className="fill-[#c5c0b6] dark:fill-white/30" />
-        <circle cx="555" cy="75" r="4" className="fill-[#c5c0b6] dark:fill-white/30" />
-        <circle cx="555" cy="133" r="4" className="fill-[#c5c0b6] dark:fill-white/30" />
+        <circle cx="555" cy="17" r="4" className="fill-foreground/20" />
+        <circle cx="555" cy="75" r="4" className="fill-foreground/20" />
+        <circle cx="555" cy="133" r="4" className="fill-foreground/20" />
       </svg>
     </div>
   );

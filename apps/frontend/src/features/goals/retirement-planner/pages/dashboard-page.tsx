@@ -72,8 +72,8 @@ type CoverageView = "at-retirement" | "over-time";
 
 // ─── Chart types & helpers ───────────────────────────────────────
 
-// Warm olive palette for income streams (coverage bar + row dots).
-// Values come from --fi-stream-N CSS variables which swap between light/dark themes.
+// Craft data palette for income streams (coverage bar + row dots).
+// Values come from --fi-stream-N variables that adapt to light and dark themes.
 const INCOME_STREAM_COLORS = [
   "var(--fi-stream-1)",
   "var(--fi-stream-2)",
@@ -629,7 +629,7 @@ export default function DashboardPage({
                   </div>
 
                   {/* Sentence-style verdict */}
-                  <h1 className="max-w-[95%] font-serif text-2xl font-normal leading-[1.15] tracking-tight">
+                  <h1 className="max-w-[95%] text-2xl font-semibold leading-[1.15] tracking-tight">
                     {isTraditionalMode ? (
                       traditionalStatus === "shortfall" &&
                       spendingShortfallAge != null &&

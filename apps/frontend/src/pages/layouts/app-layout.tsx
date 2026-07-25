@@ -63,11 +63,12 @@ const AppLayoutContent = () => {
 
   if (!isSettingsReady) {
     return (
-      <div
-        className="flex h-screen items-center justify-center"
-        style={{ backgroundColor: "#09090b" }}
-      >
-        <img src="/logo-gold.png" alt="Wealthfolio" className="h-[100px] w-auto" />
+      <div className="bg-background flex h-screen items-center justify-center">
+        <img
+          src="/logo-fresh.svg"
+          alt="Wealthfolio"
+          className="shadow-modal h-16 w-16 rounded-2xl"
+        />
       </div>
     );
   }

@@ -26,20 +26,20 @@ const modKey = isAppleDevice() ? "⌘" : "Ctrl";
 
 export function AppSidebar({ navigation }: AppSidebarProps) {
   const { t } = useTranslation();
-  const [collapsed, setCollapsed] = useState(true);
+  const [collapsed, setCollapsed] = useState(false);
   const { logout, requiresAuth } = useAuth();
   const addonMenuItems = navigation?.addonMenuItems ?? navigation?.addons ?? [];
 
   return (
     <div
       className={cn({
-        "light:bg-secondary/50 hidden h-full border-r pt-12 transition-[width] duration-300 ease-in-out md:flex md:flex-shrink-0 md:overflow-hidden": true,
+        "bg-sidebar border-sidebar-border/70 hidden h-full border-r pt-12 transition-[width] duration-200 ease-out md:flex md:flex-shrink-0 md:overflow-hidden": true,
         "md:w-sidebar": !collapsed,
         "md:w-sidebar-collapsed": collapsed,
       })}
       data-tauri-drag-region="true"
     >
-      <div className="z-20 w-full rounded-xl md:flex">
+      <div className="z-20 w-full md:flex">
         <div className="flex w-full flex-col">
           <div className="flex w-full flex-1 flex-col overflow-y-auto">
             <div data-tauri-drag-region="true" className="flex-1">
@@ -50,21 +50,22 @@ export function AppSidebar({ navigation }: AppSidebarProps) {
               >
                 <div
                   data-tauri-drag-region="true"
-                  className="draggable flex items-center justify-center pb-6"
+                  className={cn(
+                    "draggable flex items-center pb-5",
+                    collapsed ? "justify-center" : "px-1",
+                  )}
                 >
                   <Link to="/">
                     <img
-                      className={`h-10 w-10 rounded-full bg-transparent shadow-lg transition-transform duration-700 ease-in-out [transform-style:preserve-3d] hover:[transform:rotateY(-180deg)] ${
-                        collapsed ? "[transform:rotateY(180deg)]" : ""
-                      }`}
+                      className="shadow-minimal h-8 w-8 rounded-[9px]"
                       aria-hidden="true"
-                      src="/logo.png"
+                      src="/logo-fresh.svg"
                     />
                   </Link>
 
                   <span
                     className={cn(
-                      "text-md text-foreground/90 ml-2 font-serif text-xl font-bold transition-opacity delay-100 duration-300 ease-in-out",
+                      "text-foreground ml-2 text-sm font-semibold tracking-[-0.01em] transition-opacity duration-200 ease-out",
                       {
                         "sr-only opacity-0": collapsed,
                         "block opacity-100": !collapsed,
@@ -93,10 +94,10 @@ export function AppSidebar({ navigation }: AppSidebarProps) {
                     document.dispatchEvent(event);
                   }}
                   className={cn(
-                    "text-foreground [&_svg]:size-5! mb-4 h-12 transition-all duration-300",
+                    "text-foreground [&_svg]:size-4! mb-3 h-9 transition-colors duration-150",
                     collapsed
                       ? "justify-center rounded-md"
-                      : "bg-muted/50 hover:bg-muted/80 justify-start rounded-full px-4 shadow-none",
+                      : "bg-background shadow-minimal hover:bg-foreground/[0.03] justify-start rounded-lg px-3",
                   )}
                   title={t("common:layout.search_shortcut", { shortcut: `${modKey}+K` })}
                 >
@@ -153,7 +154,7 @@ export function AppSidebar({ navigation }: AppSidebarProps) {
                   variant="ghost"
                   onClick={logout}
                   className={cn(
-                    "text-foreground [&_svg]:size-5! mb-1 h-12 rounded-md transition-all duration-300",
+                    "text-foreground [&_svg]:size-4! mb-1 h-9 rounded-md text-[13px] transition-colors duration-150",
                     collapsed ? "justify-center" : "justify-start",
                   )}
                   title={t("common:layout.logout")}
@@ -178,7 +179,7 @@ export function AppSidebar({ navigation }: AppSidebarProps) {
                   title={t("common:layout.toggle_sidebar")}
                   variant="ghost"
                   onClick={() => setCollapsed(!collapsed)}
-                  className="text-muted-foreground [&_svg]:size-5! cursor-pointer rounded-md hover:bg-transparent"
+                  className="text-muted-foreground [&_svg]:size-4! hover:bg-foreground/[0.04] cursor-pointer rounded-md"
                   aria-label={
                     collapsed
                       ? t("common:layout.expand_sidebar")
@@ -261,8 +262,9 @@ function NavItem({ item, collapsed, className, ...props }: NavItemProps) {
       variant={isActive ? "secondary" : "ghost"}
       asChild
       className={cn(
-        "text-foreground [&_svg]:size-5! mb-1 h-12 rounded-md transition-all duration-300",
+        "text-foreground [&_svg]:size-4! mb-1 h-9 rounded-md text-[13px] transition-colors duration-150",
         collapsed ? "justify-center" : "justify-start",
+        isActive && "shadow-minimal-flat",
         className,
       )}
     >
@@ -307,8 +309,9 @@ function AddonsMenu({ addons, collapsed, onSetPinned }: AddonsMenuProps) {
         <Button
           variant={hasActiveAddon ? "secondary" : "ghost"}
           className={cn(
-            "text-foreground [&_svg]:size-5! mb-1 h-12 rounded-md transition-all duration-300",
+            "text-foreground [&_svg]:size-4! mb-1 h-9 rounded-md text-[13px] transition-colors duration-150",
             collapsed ? "justify-center" : "justify-start",
+            hasActiveAddon && "shadow-minimal-flat",
           )}
         >
           <span aria-hidden="true">
@@ -341,13 +344,13 @@ function AddonsMenu({ addons, collapsed, onSetPinned }: AddonsMenuProps) {
             <div
               key={addon.id ?? addon.href}
               className={cn(
-                "hover:bg-accent focus-within:bg-accent group flex h-12 items-center rounded-sm transition-colors",
+                "hover:bg-foreground/[0.04] focus-within:bg-foreground/[0.04] group flex h-9 items-center rounded-md transition-colors",
                 isActive && "bg-secondary",
               )}
             >
               <DropdownMenuItem
                 asChild
-                className="h-12 min-w-0 flex-1 gap-3 px-3 py-3 text-sm font-medium"
+                className="h-9 min-w-0 flex-1 gap-2 px-2 py-2 text-[13px] font-medium"
               >
                 <Link to={addon.href} onClick={() => setOpen(false)}>
                   <span

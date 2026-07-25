@@ -11,8 +11,8 @@ import { Area, AreaChart, Tooltip, YAxis } from "recharts";
 import type { NetWorthHistoryPoint } from "@/lib/types";
 import type { MouseHandlerDataParam } from "recharts/types/synchronisation/types";
 
-// Goldish orange for net worth chart (consistent across light/dark modes)
-const CHART_COLOR = "hsl(38, 75%, 50%)";
+// Craft's violet accent keeps the chart analytical without reading as a gain/loss signal.
+const CHART_COLOR = "var(--brand)";
 const NEGATIVE_COLOR = "var(--destructive)";
 const CHART_SCRUB_HAPTIC_INTERVAL_MS = 80;
 

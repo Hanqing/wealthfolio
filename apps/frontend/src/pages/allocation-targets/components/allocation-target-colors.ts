@@ -1,26 +1,26 @@
-// Allocation palette — forest / sage / sand / clay / plum / stone (matches the design + chart tokens).
+// Allocation palette — shared Craft analytical tokens, theme-aware by design.
 const CALM_PALETTE = [
-  "#355c4c", // forest
-  "#7e9f8c", // sage
-  "#cbba8c", // sand
-  "#c08a5f", // clay
-  "#9a7e92", // plum
-  "#b1aa9a", // stone
-  "#5a7d6b", // forest tint
-  "#a8b89e", // sage tint
-  "#8a6b49", // muted brown
+  "var(--chart-1)",
+  "var(--chart-2)",
+  "var(--chart-3)",
+  "var(--chart-4)",
+  "var(--chart-5)",
+  "var(--chart-6)",
+  "var(--chart-7)",
+  "var(--chart-8)",
+  "var(--chart-9)",
 ];
 
 const NAMED_COLORS: Record<string, string> = {
-  equity: "#355c4c", // forest
-  fixed: "#7e9f8c", // sage
-  cash: "#cbba8c", // sand
-  commodities: "#c08a5f", // clay
-  real: "#c08a5f", // clay (real assets / real estate)
-  property: "#c08a5f", // clay
-  crypto: "#9a7e92", // plum
-  digital: "#9a7e92", // plum
-  alternatives: "#b1aa9a", // stone
+  equity: "var(--chart-4)",
+  fixed: "var(--chart-2)",
+  cash: "var(--chart-3)",
+  commodities: "var(--chart-5)",
+  real: "var(--chart-1)",
+  property: "var(--chart-1)",
+  crypto: "var(--chart-7)",
+  digital: "var(--chart-7)",
+  alternatives: "var(--chart-8)",
 };
 
 export interface AllocationTargetColorRow {

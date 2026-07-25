@@ -1,0 +1,24 @@
+<svg width="1024" height="1024" viewBox="0 0 1024 1024" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="background" x1="128" y1="96" x2="896" y2="928" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#A987C6"/>
+      <stop offset="0.52" stop-color="#8059A7"/>
+      <stop offset="1" stop-color="#624186"/>
+    </linearGradient>
+    <linearGradient id="highlight" x1="256" y1="224" x2="768" y2="800" gradientUnits="userSpaceOnUse">
+      <stop stop-color="white" stop-opacity="0.98"/>
+      <stop offset="1" stop-color="#F2EAF8" stop-opacity="0.9"/>
+    </linearGradient>
+    <filter id="soft-shadow" x="178" y="174" width="672" height="684" filterUnits="userSpaceOnUse" color-interpolation-filters="sRGB">
+      <feDropShadow dx="0" dy="22" stdDeviation="22" flood-color="#3B2352" flood-opacity="0.24"/>
+    </filter>
+  </defs>
+  <rect x="48" y="48" width="928" height="928" rx="232" fill="url(#background)"/>
+  <rect x="64" y="64" width="896" height="896" rx="216" stroke="white" stroke-opacity="0.16" stroke-width="8"/>
+  <g filter="url(#soft-shadow)" fill="url(#highlight)">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M512.299 429.027C539.918 429.024 562.307 406.633 562.307 379.013C562.307 351.392 539.915 329 512.293 329C484.672 329 462.28 351.392 462.28 379.013H387.28C387.28 309.97 443.25 254 512.293 254C581.336 254 637.307 309.97 637.307 379.013C637.307 448.054 581.339 504.024 512.299 504.027V429.027Z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M383.013 455.293C410.635 455.293 433.027 477.685 433.027 505.307C433.027 505.313 433.027 505.318 433.027 505.324H508.027C508.027 505.318 508.027 505.313 508.027 505.307C508.027 436.264 452.056 380.293 383.013 380.293C313.97 380.293 258 436.264 258 505.307C258 574.35 313.97 630.32 383.013 630.32V555.32C355.392 555.32 333 532.928 333 505.307C333 477.685 355.392 455.293 383.013 455.293Z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M509.731 585.342C482.11 585.343 459.72 607.734 459.72 635.355C459.72 662.976 482.112 685.368 509.733 685.368C537.355 685.368 559.747 662.976 559.747 635.355H634.747C634.747 704.398 578.776 760.368 509.733 760.368C440.69 760.368 384.72 704.398 384.72 635.355C384.72 566.313 440.689 510.343 509.731 510.342V585.342Z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M639.013 558.854C611.392 558.854 589 536.462 589 508.841C589 508.835 589 508.829 589 508.823H514C514 508.829 514 508.835 514 508.841C514 577.884 569.97 633.854 639.013 633.854C708.056 633.854 764.027 577.884 764.027 508.841C764.027 439.798 708.056 383.828 639.013 383.828V458.828C666.635 458.828 689.027 481.219 689.027 508.841C689.027 536.462 666.635 558.854 639.013 558.854Z"/>
+  </g>
+</svg>

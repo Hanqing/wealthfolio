@@ -38,7 +38,7 @@ export function LoginPage() {
           <CardHeader className="space-y-4 text-center">
             <div className="flex justify-center">
               <img
-                src="/logo-vantage.png"
+                src="/logo-fresh.svg"
                 alt={t("auth:login.logoAlt")}
                 className="h-16 w-16 sm:h-20 sm:w-20"
               />
@@ -68,7 +68,7 @@ export function LoginPage() {
                       disabled={loginLoading}
                       required
                       placeholder={t("auth:login.passwordPlaceholder")}
-                      className="h-12 rounded-full shadow-none"
+                      className="h-12 rounded-lg shadow-none"
                     />
                     {loginError ? (
                       <p className="text-destructive text-sm" role="alert">

@@ -389,7 +389,7 @@ function buildLiveNarrative({
         <span className="tabular-nums">
           {isBalanceHidden ? "••••" : formatCompactAmount(Math.abs(diffFromPace), currency)}
         </span>{" "}
-        <span className="font-serif">{direction}</span>
+        <span className="font-medium">{direction}</span>
       </div>
       <div className="text-foreground/90 text-sm">
         {t("spending:whereIAm.projectedPrefix")}{" "}

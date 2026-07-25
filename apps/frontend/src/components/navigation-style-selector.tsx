@@ -33,7 +33,7 @@ export function NavigationStyleSelector({
             : "border-border hover:border-primary/50",
         )}
       >
-        <div className="bg-muted/40 h-32 w-full overflow-hidden p-2.5">
+        <div className="bg-muted/40 h-28 w-full overflow-hidden p-2.5">
           <div className="flex h-full gap-1.5">
             <div className="bg-foreground/10 flex w-[15%] flex-col items-center gap-1.5 rounded-md py-2.5">
               <div className="bg-foreground/40 h-2.5 w-2.5 rounded-[4px]" />
@@ -78,7 +78,7 @@ export function NavigationStyleSelector({
             : "border-border hover:border-primary/50",
         )}
       >
-        <div className="bg-muted/40 h-32 w-full overflow-hidden p-2.5">
+        <div className="bg-muted/40 h-28 w-full overflow-hidden p-2.5">
           <div className="bg-foreground/5 relative h-full rounded-md">
             <div className="bg-foreground/10 absolute bottom-2.5 left-1/2 flex -translate-x-1/2 items-center gap-1.5 rounded-lg px-2 py-1.5 shadow-sm">
               <div className="bg-foreground/45 h-2 w-2 rounded-[3px]" />
