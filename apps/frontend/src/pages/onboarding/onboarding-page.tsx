@@ -108,7 +108,7 @@ const OnboardingPage = () => {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             transition={{ duration: 0.15 }}
-            className="my-auto flex w-full max-w-4xl justify-center"
+            className="my-auto flex w-full max-w-4xl shrink-0 justify-center"
           >
             {currentStep === 1 && <OnboardingStep1 />}
             {currentStep === 2 && (
