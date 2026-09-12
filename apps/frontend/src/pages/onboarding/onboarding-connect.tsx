@@ -1,23 +1,7 @@
 import { ExternalLink } from "@/components/external-link";
-import { Card } from "@wealthfolio/ui/components/ui/card";
 import { Icons } from "@wealthfolio/ui/components/ui/icons";
 import React, { useMemo } from "react";
 import { useTranslation } from "react-i18next";
-
-const colorClasses = {
-  brand: {
-    bg: "bg-brand/10",
-    icon: "text-brand",
-  },
-  blue: {
-    bg: "bg-blue-100 dark:bg-blue-900/30",
-    icon: "text-blue-600 dark:text-blue-400",
-  },
-  green: {
-    bg: "bg-green-100 dark:bg-green-900/30",
-    icon: "text-green-600 dark:text-green-400",
-  },
-};
 
 export const OnboardingConnect: React.FC = () => {
   const { t } = useTranslation();
@@ -27,71 +11,70 @@ export const OnboardingConnect: React.FC = () => {
         icon: Icons.CloudSync2,
         title: t("onboarding:connect.features.brokerageSync.title"),
         description: t("onboarding:connect.features.brokerageSync.description"),
-        color: "brand",
       },
       {
         icon: Icons.Devices,
         title: t("onboarding:connect.features.deviceSync.title"),
         description: t("onboarding:connect.features.deviceSync.description"),
-        color: "green",
       },
       {
         icon: Icons.UserSwitch,
         title: t("onboarding:connect.features.householdView.title"),
         description: t("onboarding:connect.features.householdView.description"),
-        color: "blue",
       },
     ],
     [t],
   );
   return (
-    <div className="w-full max-w-3xl space-y-6">
+    <div className="grid w-full max-w-4xl items-center gap-8 md:grid-cols-[0.85fr_1.15fr] md:gap-16">
       {/* Header */}
-      <div className="flex flex-col items-center text-center">
-        <div className="bg-secondary text-secondary-foreground mb-3 inline-flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-medium">
-          <Icons.Sparkles className="h-3.5 w-3.5" />
+      <div className="flex flex-col items-start">
+        <div className="text-brand mb-4 inline-flex items-center gap-2 text-xs font-medium">
+          <Icons.CloudSync2 aria-hidden="true" className="size-4" />
           {t("onboarding:connect.optional")}
         </div>
-        <h2 className="mb-2 text-xl font-semibold">{t("onboarding:connect.title")}</h2>
-        <p className="text-muted-foreground text-sm">{t("onboarding:connect.subtitle")}</p>
-      </div>
-
-      {/* Features */}
-      <div className="grid gap-3 sm:grid-cols-3 sm:gap-4">
-        {features.map((feature) => {
-          const colors = colorClasses[feature.color as keyof typeof colorClasses];
-          return (
-            <Card key={feature.title} className="border p-3 sm:p-5">
-              <div className="flex min-h-16 items-center gap-3 sm:min-h-0 sm:flex-col sm:text-center">
-                <div
-                  className={`shrink-0 rounded-lg p-2 sm:mb-4 sm:rounded-xl sm:p-3 ${colors.bg}`}
-                >
-                  <feature.icon className={`h-5 w-5 sm:h-6 sm:w-6 ${colors.icon}`} />
-                </div>
-                <div>
-                  <h3 className="text-sm font-semibold sm:mb-2 sm:text-base">{feature.title}</h3>
-                  <p className="text-muted-foreground text-xs leading-relaxed sm:text-sm">
-                    {feature.description}
-                  </p>
-                </div>
-              </div>
-            </Card>
-          );
-        })}
-      </div>
-
-      {/* Learn more link */}
-      <div className="flex justify-center">
+        <h2 className="mb-4 text-balance text-3xl font-semibold leading-tight tracking-tight sm:text-4xl">
+          {t("onboarding:connect.title")}
+        </h2>
+        <p className="text-muted-foreground text-pretty text-base leading-relaxed">
+          {t("onboarding:connect.subtitle")}
+        </p>
         <ExternalLink
           href="https://wealthfolio.app/connect/"
           target="_blank"
           rel="noopener noreferrer"
-          className="text-muted-foreground hover:text-foreground inline-flex items-center gap-1.5 text-sm transition-colors"
+          className="text-foreground hover:text-brand focus-visible:ring-brand mt-6 inline-flex min-h-11 items-center gap-2 rounded text-sm font-medium underline-offset-4 outline-none transition-colors hover:underline focus-visible:ring-2"
         >
           {t("onboarding:connect.learnMore")}
-          <Icons.ExternalLink className="h-3.5 w-3.5" />
+          <Icons.ArrowUpRight aria-hidden="true" className="size-4" />
         </ExternalLink>
       </div>
+
+      {/* Features */}
+      <ol className="divide-border border-border divide-y border-y">
+        {features.map((feature, index) => {
+          return (
+            <li key={feature.title} className="flex items-start gap-4 py-5 sm:py-6">
+              <span
+                aria-hidden="true"
+                className="text-muted-foreground/70 pt-0.5 font-mono text-xs tabular-nums"
+              >
+                0{index + 1}
+              </span>
+              <div>
+                <h3 className="mb-1.5 text-base font-semibold">{feature.title}</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  {feature.description}
+                </p>
+              </div>
+              <feature.icon
+                aria-hidden="true"
+                className="text-muted-foreground ml-auto mt-1 size-5 shrink-0"
+              />
+            </li>
+          );
+        })}
+      </ol>
     </div>
   );
 };
