@@ -41,14 +41,14 @@ export function AppearanceForm() {
     }),
     menuBarVisible: z.boolean(),
   });
-  const defaultValues: Partial<AppearanceFormValues> = {
-    theme: settings?.theme as AppearanceFormValues["theme"],
-    font: settings?.font as AppearanceFormValues["font"],
+  const values: AppearanceFormValues = {
+    theme: (settings?.theme ?? "system") as AppearanceFormValues["theme"],
+    font: (settings?.font ?? "font-sans") as AppearanceFormValues["font"],
     menuBarVisible: settings?.menuBarVisible ?? true,
   };
   const form = useForm<AppearanceFormValues>({
     resolver: zodResolver(appearanceFormSchema),
-    defaultValues,
+    values,
   });
 
   function handlePartialUpdate(data: Partial<AppearanceFormValues>) {
