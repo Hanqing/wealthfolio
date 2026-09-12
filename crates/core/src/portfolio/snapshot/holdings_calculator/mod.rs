@@ -1,5 +1,8 @@
 use crate::accounts::account_types;
-use crate::activities::{Activity, ActivityType};
+use crate::activities::{
+    is_contribution_neutral_same_account_cash_fx_conversion, Activity, ActivityType, TransferPair,
+    TransferPairResolution,
+};
 use crate::assets::AssetRepositoryTrait;
 use crate::errors::{CalculatorError, Result};
 use crate::fx::FxServiceTrait;
@@ -12,7 +15,7 @@ use crate::utils::time_utils::{activity_date_in_tz, parse_user_timezone_or_defau
 use chrono::{DateTime, NaiveDate, Utc};
 use log::{debug, warn};
 use rust_decimal::Decimal;
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet};
 use std::str::FromStr;
 use std::sync::{Arc, RwLock};
 
@@ -62,6 +65,9 @@ pub struct ProjectionRun {
     lot_disposals: HashMap<String, Vec<LotDisposal>>,
     /// Cost-basis method selected for each account during the run.
     cost_basis_methods: HashMap<String, String>,
+    /// Imported same-account cash FX legs in the current activity batch whose
+    /// contribution effect is neutral.
+    contribution_neutral_transfer_ids: HashSet<String>,
 }
 
 impl ProjectionRun {
@@ -86,6 +92,21 @@ impl ProjectionRun {
             .get(account_id)
             .cloned()
             .unwrap_or_else(|| "FIFO".to_string())
+    }
+
+    fn register_contribution_neutral_transfer_pair(&mut self, transfer_pair: &TransferPair) {
+        self.contribution_neutral_transfer_ids
+            .insert(transfer_pair.transfer_in.id.clone());
+        self.contribution_neutral_transfer_ids
+            .insert(transfer_pair.transfer_out.id.clone());
+    }
+
+    fn reset_contribution_neutral_transfers(&mut self) {
+        self.contribution_neutral_transfer_ids.clear();
+    }
+
+    fn is_contribution_neutral_transfer(&self, activity_id: &str) -> bool {
+        self.contribution_neutral_transfer_ids.contains(activity_id)
     }
 
     /// Returns and removes all accumulated lot closures for the given account,
@@ -315,6 +336,16 @@ impl HoldingsCalculator {
 
         let account_currency = next_state.currency.clone();
         let mut warnings: Vec<HoldingsCalculationWarning> = Vec::new();
+        run.reset_contribution_neutral_transfers();
+        let transfer_resolution = TransferPairResolution::from_activities(activities_today);
+        for pair in transfer_resolution.pairs().iter().filter(|pair| {
+            is_contribution_neutral_same_account_cash_fx_conversion(
+                &pair.transfer_in,
+                &pair.transfer_out,
+            )
+        }) {
+            run.register_contribution_neutral_transfer_pair(pair);
+        }
 
         // Session-wide asset info cache to avoid DB lookups per unique asset.
         let mut asset_cache: AssetCache = HashMap::new();
@@ -411,6 +442,20 @@ impl HoldingsCalculator {
             );
         }
         next_state.cost_basis = final_cost_basis_acct;
+
+        // Precompute per-position acquisition-FX cost basis in account and base
+        // currency so valuation can read a scalar instead of walking the
+        // embedded `lots`. This is additive parity groundwork: lots are still
+        // written unchanged, and the scalar mirrors valuation's per-lot
+        // conversion exactly (see `precompute_position_cost_basis`).
+        let base_currency = self.base_currency.read().unwrap().clone();
+        for position in next_state.positions.values_mut() {
+            let cost_basis_account =
+                self.precompute_position_cost_basis(position, &account_currency);
+            let cost_basis_base = self.precompute_position_cost_basis(position, &base_currency);
+            position.cost_basis_account = cost_basis_account;
+            position.cost_basis_base = cost_basis_base;
+        }
 
         // Compute cash totals (once at end of day per spec)
         self.compute_cash_totals(&mut next_state, target_date);
