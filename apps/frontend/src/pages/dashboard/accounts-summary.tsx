@@ -22,6 +22,7 @@ import { Separator } from "@wealthfolio/ui/components/ui/separator";
 import { Skeleton } from "@wealthfolio/ui/components/ui/skeleton";
 import { Tooltip, TooltipContent, TooltipTrigger } from "@wealthfolio/ui/components/ui/tooltip";
 import { format } from "date-fns";
+import { BriefcaseBusiness, WalletCards } from "lucide-react";
 import React, { useCallback, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
@@ -267,6 +268,20 @@ const AccountSummaryComponent = React.memo(
 
     const content = (
       <>
+        {!isNested && (
+          <span
+            aria-hidden="true"
+            className="bg-surface-elevated text-muted-foreground ring-border/70 flex size-9 shrink-0 items-center justify-center rounded-xl ring-1 ring-inset md:size-11"
+          >
+            {isGroup ? (
+              <Icons.Group className="size-4 md:size-5" />
+            ) : item.accountType === "SECURITIES" ? (
+              <BriefcaseBusiness className="size-4 md:size-5" />
+            ) : (
+              <WalletCards className="size-4 md:size-5" />
+            )}
+          </span>
+        )}
         <div className="flex min-w-0 flex-1 flex-col gap-1 md:gap-1.5">
           <h3 className="flex items-center gap-1.5 text-sm font-semibold leading-tight md:text-base md:font-semibold">
             <span className="truncate">{name}</span>
@@ -289,7 +304,7 @@ const AccountSummaryComponent = React.memo(
         </div>
         <div className="flex shrink-0 items-center gap-2 md:gap-3">
           <div className="flex min-h-[3rem] flex-col items-end justify-center gap-1 md:gap-1.5">
-            <p className="text-sm font-semibold leading-tight md:text-base md:font-semibold">
+            <p className="text-sm font-semibold tabular-nums leading-tight md:text-base md:font-semibold">
               <PrivacyAmount value={totalValue} currency={currency} />
             </p>
             {secondaryMetricContent && (
@@ -348,7 +363,7 @@ const AccountSummaryComponent = React.memo(
       return (
         <Link
           to={`/accounts/${accountId}`}
-          className="shadow-minimal hover:bg-foreground/[0.02] bg-background flex w-full cursor-pointer items-center justify-between gap-3 rounded-lg px-4 py-3 transition-colors duration-150 md:px-5 md:py-4"
+          className="shadow-minimal-flat hover:shadow-minimal focus-visible:ring-brand/50 bg-card flex w-full cursor-pointer items-center justify-between gap-3 rounded-xl px-4 py-4 outline-none transition-[background-color,box-shadow] duration-150 focus-visible:ring-2 md:gap-4 md:px-5 md:py-5"
         >
           {content}
         </Link>
@@ -622,7 +637,7 @@ export const AccountsSummary = React.memo(
               return (
                 <div
                   key={group.accountName}
-                  className="shadow-minimal bg-background overflow-hidden rounded-lg"
+                  className="shadow-minimal-flat bg-card overflow-hidden rounded-xl"
                 >
                   <div className="cursor-pointer">
                     <AccountSummaryComponent
@@ -702,7 +717,7 @@ export const AccountsSummary = React.memo(
           <h2 className="text-sm font-semibold tracking-tight">{t("dashboard:accounts")}</h2>
           <Button
             variant="ghost"
-            className="text-muted-foreground hover:bg-success/10"
+            className="text-muted-foreground hover:bg-foreground/5"
             size="sm"
             onClick={() => setAccountsGrouped(!accountsGrouped)}
             aria-label={accountsGrouped ? t("dashboard:list_view") : t("dashboard:group_view")}

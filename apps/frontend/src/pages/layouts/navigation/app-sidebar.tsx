@@ -46,16 +46,20 @@ export function AppSidebar({ navigation }: AppSidebarProps) {
               <nav
                 data-tauri-drag-region="true"
                 aria-label={t("common:layout.sidebar")}
-                className="flex shrink-0 flex-col p-2"
+                className="flex shrink-0 flex-col px-3 py-2"
               >
                 <div
                   data-tauri-drag-region="true"
                   className={cn(
-                    "draggable flex items-center pb-5",
+                    "draggable flex items-center pb-7",
                     collapsed ? "justify-center" : "px-1",
                   )}
                 >
-                  <Link to="/">
+                  <Link
+                    to="/"
+                    aria-label="Wealthfolio"
+                    className="focus-visible:ring-brand rounded-lg outline-none focus-visible:ring-2"
+                  >
                     <img
                       className="shadow-minimal h-8 w-8 rounded-[9px]"
                       aria-hidden="true"
@@ -97,7 +101,7 @@ export function AppSidebar({ navigation }: AppSidebarProps) {
                     "text-foreground [&_svg]:size-4! mb-3 h-9 transition-colors duration-150",
                     collapsed
                       ? "justify-center rounded-md"
-                      : "bg-background shadow-minimal hover:bg-foreground/[0.03] justify-start rounded-lg px-3",
+                      : "bg-foreground/[0.035] hover:bg-foreground/[0.06] justify-start rounded-lg px-3 shadow-none",
                   )}
                   title={t("common:layout.search_shortcut", { shortcut: `${modKey}+K` })}
                 >
@@ -143,7 +147,7 @@ export function AppSidebar({ navigation }: AppSidebarProps) {
               </nav>
             </div>
 
-            <div className="flex shrink-0 flex-col p-2">
+            <div className="flex shrink-0 flex-col px-3 py-2">
               {navigation?.secondary?.map((item) => (
                 <NavItem key={item.title} item={item} collapsed={collapsed} />
               ))}
@@ -262,9 +266,10 @@ function NavItem({ item, collapsed, className, ...props }: NavItemProps) {
       variant={isActive ? "secondary" : "ghost"}
       asChild
       className={cn(
-        "text-foreground [&_svg]:size-4! mb-1 h-9 rounded-md text-[13px] transition-colors duration-150",
+        "text-muted-foreground hover:text-foreground [&_svg]:size-4! mb-1 h-10 rounded-lg text-[13px] transition-colors duration-150",
         collapsed ? "justify-center" : "justify-start",
-        isActive && "shadow-minimal-flat",
+        isActive &&
+          "bg-card text-brand shadow-minimal hover:bg-card hover:text-brand font-semibold",
         className,
       )}
     >
