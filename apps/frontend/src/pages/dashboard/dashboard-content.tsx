@@ -164,8 +164,6 @@ export function DashboardContent() {
     [selectedInterval],
   );
 
-  const isNegative = totalValue < 0;
-
   // Callback for IntervalSelector
   const handleIntervalSelect = (
     code: TimePeriod,
@@ -178,68 +176,64 @@ export function DashboardContent() {
   };
 
   return (
-    <div className="flex min-h-full flex-col">
-      <div className="px-4 pb-1 pt-2 md:px-6 lg:px-8">
-        <PortfolioUpdateTrigger
-          lastCalculatedAt={portfolioSourceDataAsOf}
-          notices={portfolioCurrentValuation?.summary.warnings}
-        >
-          <div className="flex items-start gap-2">
-            <div>
-              <Balance
-                isLoading={isCurrentValuationLoading}
-                isUnavailable={isCurrentValuationUnavailable}
-                targetValue={totalValue}
-                currency={baseCurrency}
-                displayCurrency={true}
-              />
-              <div className="text-md flex min-h-5 items-center space-x-3">
-                {isPortfolioPerformanceLoading ? (
-                  <div className="flex items-center gap-3">
-                    <Skeleton className="h-4 w-24" />
-                    <div className="border-secondary my-1 border-r pr-2" />
-                    <Skeleton className="h-4 w-16" />
-                  </div>
-                ) : (
-                  <>
-                    {gainLossAmount == null ? (
-                      <span className="text-muted-foreground text-sm">N/A</span>
-                    ) : (
-                      <GainAmount
-                        className="text-sm"
-                        value={gainLossAmount}
-                        currency={baseCurrency}
-                        displayCurrency={false}
-                      />
-                    )}
-                    <div className="border-secondary my-1 border-r pr-2" />
-                    {simpleReturn == null ? (
-                      <span className="text-muted-foreground text-sm">N/A</span>
-                    ) : (
-                      <GainPercent className="text-sm" value={simpleReturn} animated={true} />
-                    )}
-                  </>
-                )}
-                {selectedInterval && (
-                  <span className="text-muted-foreground ml-1 text-sm">
-                    {t(`ui:interval.${selectedInterval}`)}
-                  </span>
-                )}
+    <div className="portfolio-dashboard">
+      <section className="portfolio-overview" aria-label={t("dashboard:total_value")}>
+        <div className="portfolio-overview-header">
+          <p className="portfolio-eyebrow">
+            {t("dashboard:total_value")} <span>{baseCurrency}</span>
+          </p>
+          <PortfolioUpdateTrigger
+            lastCalculatedAt={portfolioSourceDataAsOf}
+            notices={portfolioCurrentValuation?.summary.warnings}
+          >
+            <div className="flex items-start gap-2">
+              <div>
+                <Balance
+                  isLoading={isCurrentValuationLoading}
+                  isUnavailable={isCurrentValuationUnavailable}
+                  targetValue={totalValue}
+                  currency={baseCurrency}
+                  displayCurrency={true}
+                />
+                <div className="portfolio-return flex min-h-5 flex-wrap items-center gap-x-3 gap-y-1">
+                  {isPortfolioPerformanceLoading ? (
+                    <div className="flex items-center gap-3">
+                      <Skeleton className="h-4 w-24" />
+                      <div className="border-secondary my-1 border-r pr-2" />
+                      <Skeleton className="h-4 w-16" />
+                    </div>
+                  ) : (
+                    <>
+                      {gainLossAmount == null ? (
+                        <span className="text-muted-foreground text-sm">N/A</span>
+                      ) : (
+                        <GainAmount
+                          className="text-sm"
+                          value={gainLossAmount}
+                          currency={baseCurrency}
+                          displayCurrency={false}
+                        />
+                      )}
+                      <div className="border-secondary my-1 border-r pr-2" />
+                      {simpleReturn == null ? (
+                        <span className="text-muted-foreground text-sm">N/A</span>
+                      ) : (
+                        <GainPercent className="text-sm" value={simpleReturn} animated={true} />
+                      )}
+                    </>
+                  )}
+                  {selectedInterval && (
+                    <span className="text-muted-foreground ml-1 text-sm">
+                      {t(`ui:interval.${selectedInterval}`)}
+                    </span>
+                  )}
+                </div>
               </div>
             </div>
-          </div>
-        </PortfolioUpdateTrigger>
-      </div>
+          </PortfolioUpdateTrigger>
+        </div>
 
-      <div
-        className="bg-surface-elevated/45 border-border/60 flex grow flex-col border-t"
-        style={{
-          backgroundImage: isNegative
-            ? `linear-gradient(to bottom, color-mix(in oklab, var(--destructive) 8%, transparent), transparent 28%)`
-            : `linear-gradient(to bottom, color-mix(in oklab, var(--success) 7%, transparent), transparent 28%)`,
-        }}
-      >
-        <div className="h-70">
+        <div className="portfolio-chart">
           <HistoryChart
             data={chartData}
             isLoading={isValuationHistoryLoading}
@@ -247,38 +241,38 @@ export function DashboardContent() {
             minDomainSpanRatio={chartMinDomainSpanRatio}
             netContributionMaxDomainSpanRatio={chartNetContributionMaxDomainSpanRatio}
           />
-          {valuationHistory && chartData.length > 0 && (
-            <div className="flex w-full justify-center">
-              <IntervalSelector
-                className="pointer-events-auto relative z-20 w-full max-w-screen-sm sm:max-w-screen-md md:max-w-2xl lg:max-w-3xl"
-                onIntervalSelect={handleIntervalSelect}
-                onHaptic={triggerHaptic}
-                isLoading={isValuationHistoryLoading}
-                storageKey={INTERVAL_STORAGE_KEY}
-                defaultValue={DEFAULT_INTERVAL}
-              />
-            </div>
-          )}
         </div>
+        {valuationHistory && chartData.length > 0 && (
+          <div className="portfolio-chart-controls">
+            <IntervalSelector
+              className="pointer-events-auto relative z-20 w-full max-w-screen-sm sm:max-w-screen-md md:max-w-2xl lg:max-w-3xl"
+              onIntervalSelect={handleIntervalSelect}
+              onHaptic={triggerHaptic}
+              isLoading={isValuationHistoryLoading}
+              storageKey={INTERVAL_STORAGE_KEY}
+              defaultValue={DEFAULT_INTERVAL}
+            />
+          </div>
+        )}
+      </section>
 
-        <div className="grow px-4 pb-[var(--mobile-nav-total-offset)] pt-10 md:px-6 md:pb-6 md:pt-8 lg:px-8 lg:pb-8 lg:pt-10">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
-            <div className="lg:col-span-2">
-              <AccountsSummary
-                dateRange={dateRange}
-                isAllTime={isAllTime}
-                currentAccountValuations={portfolioCurrentValuation?.accounts}
-                isLoadingCurrentValuations={isCurrentValuationLoading}
-              />
-            </div>
-            <div className="space-y-5 lg:col-span-1">
-              <TopHoldings
-                holdings={holdings}
-                isLoading={isHoldingsLoading}
-                baseCurrency={baseCurrency}
-              />
-              <SavingGoals />
-            </div>
+      <div className="portfolio-details">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
+          <div className="lg:col-span-2">
+            <AccountsSummary
+              dateRange={dateRange}
+              isAllTime={isAllTime}
+              currentAccountValuations={portfolioCurrentValuation?.accounts}
+              isLoadingCurrentValuations={isCurrentValuationLoading}
+            />
+          </div>
+          <div className="space-y-5 lg:col-span-1">
+            <TopHoldings
+              holdings={holdings}
+              isLoading={isHoldingsLoading}
+              baseCurrency={baseCurrency}
+            />
+            <SavingGoals />
           </div>
         </div>
       </div>

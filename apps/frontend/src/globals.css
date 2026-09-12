@@ -18,6 +18,106 @@
 /* Enable class-based dark mode across the subtree (Tailwind v4 pattern) */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/* The portfolio overview is one bounded reading surface. Chart controls remain
+   in normal flow so they cannot overlap the account sections below. */
+@layer components {
+  .portfolio-dashboard {
+    width: 100%;
+    max-width: 1440px;
+    min-height: 100%;
+    margin-inline: auto;
+    padding: 24px 32px 40px;
+  }
+
+  .portfolio-overview {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    box-shadow: 0 4px 20px -12px rgb(38 36 42 / 0.16);
+  }
+
+  .portfolio-overview-header {
+    padding: 28px 32px 20px;
+  }
+
+  .portfolio-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 12px;
+    color: var(--muted-foreground);
+    font-size: 13px;
+    font-weight: 500;
+  }
+
+  .portfolio-eyebrow > span {
+    border: 1px solid var(--border);
+    border-radius: 5px;
+    padding: 1px 5px;
+    font-size: 11px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .portfolio-return {
+    margin-top: 12px;
+  }
+
+  .portfolio-chart {
+    height: 220px;
+    margin-inline: 32px;
+    background-image: repeating-linear-gradient(to top, var(--border) 0 1px, transparent 1px 25%);
+  }
+
+  .portfolio-chart .recharts-area-curve {
+    stroke-width: 2;
+  }
+
+  .portfolio-chart-controls {
+    display: flex;
+    justify-content: center;
+    padding: 14px 20px;
+    margin-top: 12px;
+    border-top: 1px solid var(--border);
+  }
+
+  .portfolio-details {
+    padding-top: 28px;
+  }
+
+  @media (max-width: 767px) {
+    .portfolio-dashboard {
+      padding: 16px 16px calc(var(--mobile-nav-total-offset) + 24px);
+    }
+    .portfolio-overview {
+      border-radius: 12px;
+    }
+    .portfolio-overview-header {
+      padding: 20px 20px 24px;
+    }
+    .portfolio-chart {
+      height: 180px;
+      margin-inline: 20px;
+    }
+    .portfolio-chart-controls {
+      padding: 8px 4px;
+    }
+    .portfolio-chart-controls button {
+      min-height: 44px;
+    }
+    .portfolio-details {
+      padding-top: 24px;
+    }
+  }
+}
+
+/* Override Balance's reusable text size only inside the overview. */
+.portfolio-overview [data-testid="portfolio-balance"] {
+  font-size: clamp(32px, 3.2vw, 48px);
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  font-variant-numeric: tabular-nums;
+}
+
 /* Tailwind v4 custom utilities for 3D rotation used in the sidebar logo */
 @utility transform-3d {
   transform-style: preserve-3d;
@@ -405,7 +505,7 @@
   /* Shadcn tokens as full HSL colors */
   --background: hsl(var(--flexoki-bg));
   --foreground: hsl(var(--flexoki-tx));
-  --card: hsl(var(--flexoki-bg));
+  --card: #ffffff;
   --card-foreground: hsl(var(--flexoki-tx));
   --popover: hsl(var(--flexoki-bg));
   --popover-foreground: hsl(var(--flexoki-tx));
@@ -498,6 +598,8 @@
 }
 
 .dark {
+  color-scheme: dark;
+  --card: hsl(270 6% 13%);
   /* Craft dark mode keeps the same cool hue and foreground-derived layers. */
   --flexoki-bg: 270 8% 10%;
   --flexoki-bg-2: 270 6% 13%;

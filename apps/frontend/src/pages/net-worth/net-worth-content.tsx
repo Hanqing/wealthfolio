@@ -187,95 +187,89 @@ export function NetWorthContent() {
   }
 
   return (
-    <div className="flex min-h-full flex-col">
-      {/* Top section: Net Worth value */}
-      <div className="px-4 pb-1 pt-2 md:px-6 md:pb-2 lg:px-8">
-        <div className="flex items-start gap-2">
-          <div>
-            <div className="flex items-center gap-3">
-              <Balance
-                isLoading={isLoading}
-                targetValue={parsedData?.netWorth ?? 0}
-                currency={currency}
-                displayCurrency={true}
-                displayDecimal={false}
-                compact={isMobile}
-              />
-              {hasStaleValuations && (
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger asChild>
-                      <div className="bg-warning/10 flex h-8 w-8 items-center justify-center rounded-full">
-                        <Icons.AlertCircle className="text-warning h-4 w-4" />
-                      </div>
-                    </TooltipTrigger>
-                    <TooltipContent side="bottom" className="max-w-[280px]">
-                      <p className="mb-2 text-xs font-medium">
-                        {t("insights:networth.stale_valuations_tooltip")}
-                      </p>
-                      <ul className="space-y-1 text-xs">
-                        {netWorthData?.staleAssets.map((asset) => (
-                          <li
-                            key={asset.assetId}
-                            className="flex items-center justify-between gap-2"
-                          >
-                            <span className="truncate">{asset.name ?? asset.assetId}</span>
-                            <span className="text-muted-foreground shrink-0">
-                              {t("insights:networth.days_ago", { count: asset.daysStale })}
-                            </span>
-                          </li>
-                        ))}
-                      </ul>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
-              )}
-            </div>
-            <div className="text-md flex space-x-3">
-              {isHistoryLoading ? (
-                <div className="flex items-center gap-3 pt-1">
-                  <Skeleton className="h-4 w-24" />
-                  <div className="border-secondary my-1 border-r pr-2" />
-                  <Skeleton className="h-4 w-16" />
-                </div>
-              ) : (
-                <>
-                  <GainAmount
-                    className="lg:text-md text-sm"
-                    value={gainLossAmount}
-                    currency={currency}
-                    displayCurrency={false}
-                  />
-                  <div className="border-secondary my-1 border-r pr-2" />
-                  <GainPercent
-                    className="lg:text-md text-sm"
-                    value={gainLossPercent}
-                    animated={true}
-                  />
-                </>
-              )}
-              {periodCode && (
-                <span className="lg:text-md text-muted-foreground ml-1 text-sm">
-                  {t(`ui:interval.${periodCode}`)}
-                </span>
-              )}
+    <div className="portfolio-dashboard">
+      <section className="portfolio-overview" aria-label={t("insights:networth.chart.net_worth")}>
+        {/* Top section: Net Worth value */}
+        <div className="portfolio-overview-header">
+          <p className="portfolio-eyebrow">
+            {t("insights:networth.chart.net_worth")} <span>{currency}</span>
+          </p>
+          <div className="flex items-start gap-2">
+            <div>
+              <div className="flex items-center gap-3">
+                <Balance
+                  isLoading={isLoading}
+                  targetValue={parsedData?.netWorth ?? 0}
+                  currency={currency}
+                  displayCurrency={true}
+                  displayDecimal={false}
+                  compact={isMobile}
+                />
+                {hasStaleValuations && (
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger asChild>
+                        <div className="bg-warning/10 flex h-8 w-8 items-center justify-center rounded-full">
+                          <Icons.AlertCircle className="text-warning h-4 w-4" />
+                        </div>
+                      </TooltipTrigger>
+                      <TooltipContent side="bottom" className="max-w-[280px]">
+                        <p className="mb-2 text-xs font-medium">
+                          {t("insights:networth.stale_valuations_tooltip")}
+                        </p>
+                        <ul className="space-y-1 text-xs">
+                          {netWorthData?.staleAssets.map((asset) => (
+                            <li
+                              key={asset.assetId}
+                              className="flex items-center justify-between gap-2"
+                            >
+                              <span className="truncate">{asset.name ?? asset.assetId}</span>
+                              <span className="text-muted-foreground shrink-0">
+                                {t("insights:networth.days_ago", { count: asset.daysStale })}
+                              </span>
+                            </li>
+                          ))}
+                        </ul>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                )}
+              </div>
+              <div className="portfolio-return flex flex-wrap items-center gap-x-3 gap-y-1">
+                {isHistoryLoading ? (
+                  <div className="flex items-center gap-3 pt-1">
+                    <Skeleton className="h-4 w-24" />
+                    <div className="border-secondary my-1 border-r pr-2" />
+                    <Skeleton className="h-4 w-16" />
+                  </div>
+                ) : (
+                  <>
+                    <GainAmount
+                      className="lg:text-md text-sm"
+                      value={gainLossAmount}
+                      currency={currency}
+                      displayCurrency={false}
+                    />
+                    <div className="border-secondary my-1 border-r pr-2" />
+                    <GainPercent
+                      className="lg:text-md text-sm"
+                      value={gainLossPercent}
+                      animated={true}
+                    />
+                  </>
+                )}
+                {periodCode && (
+                  <span className="lg:text-md text-muted-foreground ml-1 text-sm">
+                    {t(`ui:interval.${periodCode}`)}
+                  </span>
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
 
-      {/* Wrapper: chart + content with continuous gradient */}
-      <div
-        className="bg-surface-elevated/45 border-border/60 flex grow flex-col border-t"
-        style={{
-          backgroundImage:
-            (parsedData?.netWorth ?? 0) < 0
-              ? `linear-gradient(to bottom, color-mix(in oklab, var(--destructive) 8%, transparent), transparent 28%)`
-              : `linear-gradient(to bottom, color-mix(in oklab, var(--success) 7%, transparent), transparent 28%)`,
-        }}
-      >
         {/* Chart section */}
-        <div className="h-[280px]">
+        <div className="portfolio-chart">
           {isHistoryLoading ? (
             <div className="flex h-full items-center justify-center">
               <Skeleton className="h-full w-full" />
@@ -290,108 +284,108 @@ export function NetWorthContent() {
               </p>
             </div>
           )}
-          {historyData && historyData.length > 0 && (
-            <div className="flex w-full justify-center">
-              <IntervalSelector
-                className="pointer-events-auto relative z-20 w-full max-w-screen-sm sm:max-w-screen-md md:max-w-2xl lg:max-w-3xl"
-                onIntervalSelect={handleIntervalSelect}
-                isLoading={isHistoryLoading}
-                storageKey={INTERVAL_STORAGE_KEY}
-                defaultValue={DEFAULT_INTERVAL}
-              />
-            </div>
-          )}
         </div>
+        {historyData && historyData.length > 0 && (
+          <div className="portfolio-chart-controls">
+            <IntervalSelector
+              className="pointer-events-auto relative z-20 w-full max-w-screen-sm sm:max-w-screen-md md:max-w-2xl lg:max-w-3xl"
+              onIntervalSelect={handleIntervalSelect}
+              isLoading={isHistoryLoading}
+              storageKey={INTERVAL_STORAGE_KEY}
+              defaultValue={DEFAULT_INTERVAL}
+            />
+          </div>
+        )}
+      </section>
 
-        {/* Content section */}
-        <div className="grow px-4 pb-[var(--mobile-nav-total-offset)] pt-10 md:px-6 md:pb-6 md:pt-8 lg:px-8 lg:pb-8 lg:pt-10">
-          <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
-            {/* Left column: Breakdown */}
-            <div className="lg:col-span-2">
-              {isLoading || isHistoryLoading ? (
-                <DashboardCard title={t("insights:networth.breakdown")}>
-                  <div className="space-y-4">
-                    {Array.from({ length: 5 }).map((_, i) => (
-                      <div key={i} className="flex items-center justify-between">
-                        <Skeleton className="h-4 w-32" />
-                        <Skeleton className="h-4 w-24" />
-                      </div>
-                    ))}
-                  </div>
-                </DashboardCard>
-              ) : parsedData ? (
-                <BreakdownTable
-                  data={parsedData}
-                  history={parsedHistory}
-                  currency={currency}
-                  periodLabel={periodLabel}
-                  onSelect={setSelected}
-                />
-              ) : (
-                <div className="border-brand/15 bg-brand/[0.06] rounded-xl border p-6 text-center md:p-8">
-                  <p className="text-sm">{t("insights:networth.no_assets_found")}</p>
-                  <Link
-                    to="/holdings"
-                    className="text-muted-foreground hover:text-foreground mt-2 inline-flex items-center gap-1 text-xs underline-offset-4 hover:underline"
-                  >
-                    {t("insights:networth.add_first_asset")}
-                    <Icons.ChevronRight className="h-3 w-3" />
-                  </Link>
+      {/* Content section */}
+      <div className="portfolio-details">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-3 lg:gap-8">
+          {/* Left column: Breakdown */}
+          <div className="lg:col-span-2">
+            {isLoading || isHistoryLoading ? (
+              <DashboardCard title={t("insights:networth.breakdown")}>
+                <div className="space-y-4">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <div key={i} className="flex items-center justify-between">
+                      <Skeleton className="h-4 w-32" />
+                      <Skeleton className="h-4 w-24" />
+                    </div>
+                  ))}
                 </div>
-              )}
-            </div>
+              </DashboardCard>
+            ) : parsedData ? (
+              <BreakdownTable
+                data={parsedData}
+                history={parsedHistory}
+                currency={currency}
+                periodLabel={periodLabel}
+                onSelect={setSelected}
+              />
+            ) : (
+              <div className="border-brand/15 bg-brand/[0.06] rounded-xl border p-6 text-center md:p-8">
+                <p className="text-sm">{t("insights:networth.no_assets_found")}</p>
+                <Link
+                  to="/holdings"
+                  className="text-muted-foreground hover:text-foreground mt-2 inline-flex items-center gap-1 text-xs underline-offset-4 hover:underline"
+                >
+                  {t("insights:networth.add_first_asset")}
+                  <Icons.ChevronRight className="h-3 w-3" />
+                </Link>
+              </div>
+            )}
+          </div>
 
-            {/* Right column: insight cards */}
-            <div className="space-y-5 lg:col-span-1">
-              {velocity && (
-                <VelocityCard
-                  velocity={velocity}
-                  trailingYearMonthly={trailingYearMonthly}
-                  currency={currency}
-                  periodLabel={periodLabel}
-                />
-              )}
+          {/* Right column: insight cards */}
+          <div className="space-y-5 lg:col-span-1">
+            {velocity && (
+              <VelocityCard
+                velocity={velocity}
+                trailingYearMonthly={trailingYearMonthly}
+                currency={currency}
+                periodLabel={periodLabel}
+              />
+            )}
 
-              {momentum && (
-                <MomentumCard momentum={momentum} currency={currency} periodLabel={periodLabel} />
-              )}
+            {momentum && (
+              <MomentumCard momentum={momentum} currency={currency} periodLabel={periodLabel} />
+            )}
 
-              {/* Stale valuations warning */}
-              {hasStaleValuations && (
-                <div className="border-warning/10 bg-warning/10 rounded-xl border p-4 backdrop-blur-xl md:p-5">
-                  <div className="mb-2 flex items-center gap-2">
-                    <Icons.AlertCircle className="text-warning h-4 w-4 shrink-0" />
-                    <h3 className="text-foreground text-sm font-semibold">
-                      {t("insights:networth.update_valuations")}
-                    </h3>
-                    <span className="text-muted-foreground/70 ml-auto text-xs">
-                      {t("insights:networth.assets_count", {
-                        count: netWorthData?.staleAssets.length ?? 0,
-                      })}
-                    </span>
-                  </div>
-                  <p className="text-muted-foreground ml-6 text-xs">
-                    {t("insights:networth.not_updated_over_90_days")}
-                  </p>
-                  <div className="ml-6 mt-3 space-y-1.5">
-                    {netWorthData?.staleAssets.map((asset) => (
-                      <Link
-                        key={asset.assetId}
-                        to={`/holdings/${encodeURIComponent(asset.assetId)}?tab=history`}
-                        className="hover:bg-warning/10 -mx-2 flex items-center justify-between rounded-md px-2 py-1.5 transition-colors"
-                      >
-                        <span className="truncate text-xs font-medium">
-                          {asset.name ?? asset.assetId}
-                        </span>
-                        <span className="text-muted-foreground ml-2 shrink-0 text-xs">
-                          {t("insights:networth.days_ago", { count: asset.daysStale })}
-                        </span>
-                      </Link>
-                    ))}
-                  </div>
+            {/* Stale valuations warning */}
+            {hasStaleValuations && (
+              <div className="border-warning/10 bg-warning/10 rounded-xl border p-4 backdrop-blur-xl md:p-5">
+                <div className="mb-2 flex items-center gap-2">
+                  <Icons.AlertCircle className="text-warning h-4 w-4 shrink-0" />
+                  <h3 className="text-foreground text-sm font-semibold">
+                    {t("insights:networth.update_valuations")}
+                  </h3>
+                  <span className="text-muted-foreground/70 ml-auto text-xs">
+                    {t("insights:networth.assets_count", {
+                      count: netWorthData?.staleAssets.length ?? 0,
+                    })}
+                  </span>
                 </div>
-              )}
-            </div>
+                <p className="text-muted-foreground ml-6 text-xs">
+                  {t("insights:networth.not_updated_over_90_days")}
+                </p>
+                <div className="ml-6 mt-3 space-y-1.5">
+                  {netWorthData?.staleAssets.map((asset) => (
+                    <Link
+                      key={asset.assetId}
+                      to={`/holdings/${encodeURIComponent(asset.assetId)}?tab=history`}
+                      className="hover:bg-warning/10 -mx-2 flex items-center justify-between rounded-md px-2 py-1.5 transition-colors"
+                    >
+                      <span className="truncate text-xs font-medium">
+                        {asset.name ?? asset.assetId}
+                      </span>
+                      <span className="text-muted-foreground ml-2 shrink-0 text-xs">
+                        {t("insights:networth.days_ago", { count: asset.daysStale })}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </div>
       </div>
